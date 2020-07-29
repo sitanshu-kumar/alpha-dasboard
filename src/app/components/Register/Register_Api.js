@@ -28,7 +28,7 @@ class RegisterAPI {
         store.dispatch(showEmailVerification);
       }
     } catch (er) {
-      console.log('error', er.data);
+      console.log('error', er.response);
       store.dispatch(setError('Email already exist'));
     }
   };

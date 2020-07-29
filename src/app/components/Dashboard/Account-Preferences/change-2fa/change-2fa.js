@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getCurrentProfile} from '../../../../redux/actions/profileActions';
 import QRCode from 'qrcode.react';
-import axios from 'axios';
+import {compose} from 'redux';
+import isEmpty from '../../../../validation/is-empty';
 import {BaseApiUrl} from '../../../../redux/config';
 import {change2faApi} from './change_2fa_API';
+import {withAlert} from 'react-alert';
 import './change-2fa.css';
 
 class Change2FA extends Component {
@@ -13,7 +15,7 @@ class Change2FA extends Component {
     secret_key_2fa: '',
     mfa_for_enabling: '',
     copied: false,
-    error: this.props.faState.error || '',
+    error: '',
   };
 
   componentDidMount = () => {
@@ -21,6 +23,10 @@ class Change2FA extends Component {
       if (!this.props.profile.profile.enabled_2fa)
         change2faApi.getSecretKeyFor2FA();
     });
+  };
+  static getDerivedStateFromProps = (prev, newprops) => {
+    console.log(newprops);
+    return {...prev, error: newprops.error};
   };
 
   getSecretKeyFor2FA = () => {
@@ -54,6 +60,7 @@ class Change2FA extends Component {
   render() {
     const Profile = this.props.heading;
     const {enabled_2fa, email} = this.props.profile.profile;
+    console.log(this.props.faState);
     const link = `otpauth://totp/Alpha5(${email})/?secret=${this.props.faState.secret_key_2fa}`;
 
     return (
@@ -179,4 +186,4 @@ const mapStateToProps = (state) => ({
   faState: state.faReducer,
 });
 
-export default connect(mapStateToProps, {})(Change2FA);
+export default compose(withAlert(), connect(mapStateToProps, {}))(Change2FA);

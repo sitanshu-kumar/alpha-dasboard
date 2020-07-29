@@ -1,9 +1,10 @@
 const initialState = {
   secret_key_2fa: '',
-  error: null,
+  error: '',
 };
 
 export default (state = initialState, action) => {
+  console.log(action.type);
   switch (action.type) {
     case 'SET_SECRET_KEY':
       state.secret_key_2fa = action.payload;

@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 import {clearErrors} from '../../redux/actions/errorActions';
 import PropTypes from 'prop-types';
 import ConfirmEmailModal from '../confirm-email-code/confirm-email';
-
 import {loginAPI} from './Login_Api';
 import {withAlert} from 'react-alert';
 const validEmailRegex = RegExp(

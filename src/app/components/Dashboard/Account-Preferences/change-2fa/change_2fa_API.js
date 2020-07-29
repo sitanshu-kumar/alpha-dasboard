@@ -7,6 +7,7 @@ import setAuthToken from '../../../../utils/setAuthToken';
 import {
   getCurrentProfile,
   setSecretKey,
+  setError,
   setSecretKeyError,
 } from './chnage-2fa_Dispatcher';
 
@@ -31,8 +32,8 @@ class Change2faApi {
     } catch (er) {
       let data = er.response.data;
       if (data.type == 'invalid_data')
-        store.dispatch(setSecretKeyError('Invalid Token !'));
-      else store.dispatch(setSecretKeyError('Something Went Wrong!'));
+        store.dispatch(setError('Invalid Token!'));
+      else store.dispatch(setError('Something Went Wrong!'));
     }
   };
 
