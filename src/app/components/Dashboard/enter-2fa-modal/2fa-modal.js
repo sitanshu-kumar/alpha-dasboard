@@ -41,6 +41,7 @@ class MFAModal extends Component {
   };
 
   render() {
+    console.log('profile', this.props.profile);
     return (
       <>
         <div onClick={() => this.props.hideMFAModal()} className="curtain">
@@ -50,6 +51,18 @@ class MFAModal extends Component {
             </div>
             <div className="box-modal-body">
               <div className="transfer-form">
+                <div className="transfer-form-field">
+                  <h3>Enter Email Verification code</h3>
+                  <input
+                    placeholder={'Enter 2FA'}
+                    style={{width: '100%'}}
+                    type="text"
+                    onInput={this.handleCode}
+                  />
+                  <span className="transfer-form-field-error">
+                    {this.state.error}
+                  </span>
+                </div>
                 <div className="transfer-form-field">
                   <input
                     placeholder={'Enter 2FA'}
@@ -61,7 +74,6 @@ class MFAModal extends Component {
                     {this.state.error}
                   </span>
                 </div>
-
                 <div className="transfer-center-button">
                   <button
                     onClick={this.handleSubmit}
@@ -86,6 +98,7 @@ MFAModal.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, {setMFAAuthentication})(MFAModal);

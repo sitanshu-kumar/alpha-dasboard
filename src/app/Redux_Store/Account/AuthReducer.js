@@ -16,6 +16,7 @@ const initialState = {
   loading: true,
   user: {},
   showEmailVerificationModal: false,
+  loggedInSucessful: null,
 };
 
 export default function (state = initialState, action) {
@@ -57,6 +58,9 @@ export default function (state = initialState, action) {
 
     case SET_RESET_PASSWORD_EMAIL:
       return {...state, resetPasswordEmail: action.payload};
+
+    case 'SET_LOGIN_SUCCESS':
+      return {...state, loggedInSucessful: action.payload};
 
     default:
       return state;

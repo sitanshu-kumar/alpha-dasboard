@@ -60,9 +60,10 @@ class Login extends Component {
 
   componentDidUpdate = () => {
     if (!isEmpty(this.props.errors) && !this.state.formError) {
-      // let formError = this.errorMap[this.props.errors.type];
-      let formError = 'Invalid Credentials !!';
       this.props.alert.error('Invalid Credentials !!');
+    }
+    if (!isEmpty(this.props.loggedInSucessful)) {
+      this.props.alert.error(this.props.loggedInSucessful);
     }
   };
 
@@ -229,6 +230,7 @@ Login.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
+  loginSucess: state.auth.loggedInSucessful,
 });
 
 export default compose(

@@ -9,7 +9,7 @@ import {
   showEmailVerification,
   setError,
   hideEmailVerification,
-  resetPasswordFrom,
+  setLoginSucess,
 } from './LoginDispatchFunction';
 
 class LoginAPI {
@@ -42,12 +42,13 @@ class LoginAPI {
 
         // dispatch method for response  for set current user
         store.dispatch(setCurrentUser(decoded, email, first_name, last_name));
+        store.dispatch(setLoginSucess('Logged Sucessfully!'));
       } else {
         store.dispatch(showEmailVerification());
       }
     } catch (er) {
       console.log('error', er);
-      store.dispatch(setError(er.response.data));
+      store.dispatch(setError('Invalid Credentials !!'));
     }
   };
 

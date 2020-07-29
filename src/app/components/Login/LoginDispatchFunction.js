@@ -31,3 +31,7 @@ export const setError = (data) => ({
   type: SET_ERRORS,
   payload: data,
 });
+export const setLoginSucess = (data) => ({
+  type: 'SET_LOGIN_SUCCESS',
+  payload: data,
+});

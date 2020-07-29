@@ -24,10 +24,11 @@ class Change2FA extends Component {
         change2faApi.getSecretKeyFor2FA();
     });
   };
-  static getDerivedStateFromProps = (prev, newprops) => {
+
+  /* static getDerivedStateFromProps = (prev, newprops) => {
     console.log(newprops);
     return {...prev, error: newprops.error};
-  };
+  };*/
 
   getSecretKeyFor2FA = () => {
     change2faApi.getSecretKeyFor2FA();
