@@ -1,0 +1,29 @@
+#about-us {
+  margin: 0 auto;
+  margin-top: 6rem;
+  padding: 5rem;
+  max-width: 750px;
+}
+
+#privacy-policy {
+  margin: 0 auto;
+  margin-top: 6rem;
+  padding: 3rem;
+  max-width: 750px;
+}
+
+#terms-of-use {
+  margin: 0 auto;
+  margin-top: 6rem;
+  padding: 3rem;
+  max-width: 750px;
+}
+
+p {
+  line-height: 1.8rem;
+  color: black;
+}
+
+.footer-center {
+  padding-top: unset;
+}

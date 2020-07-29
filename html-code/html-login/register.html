@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="frm-wrapper register">
+        <section class="frm-block">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="frm-outer">
+                  <ul class="frm-tabs">
+                    <li>
+                      <a href="#"> Login</a>
+                    </li>
+                    <li>
+                      <a href="#" class="active">
+                        Register
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="frm-body signin-wd">
+                    <form>
+                      <div class="auth-error">
+                        <p>{eror from server}</p>
+                      </div>
+                      <div class="login-signup-heading">
+                        Create Bitfex Account
+                      </div>
+                      <div class="form-group input-ico email">
+                        <label for="emailAddress" class="form-label">
+                          Email
+                        </label>
+                        <input
+                          formControlName="email"
+                          type="email"
+                          class="form-input"
+                          class="is-valid"
+                          maxlength="50"
+                        />
+                        <div class="form-valid-error">
+                          <div class="error-msg">
+                            Please enter valid email address!
+                          </div>
+                          <div class="error-msg">
+                            Email is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group input-ico pwd">
+                        <label for="password" class="form-label">
+                          Password
+                        </label>
+                        <input
+                          formControlName="password"
+                          type="password"
+                          class="form-input"
+                          class="is-invalid"
+                          placeholder="8-20 alpha numeric characters"
+                          maxlength="20"
+                          minlength="8"
+                          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        />
+                        <div class="form-valid-error">
+                          <div class="error-msg">
+                            Please enter your password!
+                          </div>
+                          <div class="error-msg">
+                            Password should be minimum of min 8 characters!
+                          </div>
+                          <div class="error-msg">
+                            Your password must contain at least one lowercase
+                            letter, one capital letter and one number!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group input-ico pwd">
+                        <label for="password" class="form-label">
+                          Confirm Password
+                        </label>
+                        <input
+                          formControlName="confirmPassword"
+                          type="password"
+                          class="form-input"
+                          class="is-invalid"
+                          placeholder="8-20 alpha numeric characters"
+                          maxlength="20"
+                          minlength="8"
+                        />
+                        <div class="form-valid-error">
+                          <div class="error-msg">
+                            Please enter confirm password!
+                          </div>
+                          <div class="error-msg">
+                            Password must match!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group input-ico globe">
+                        <label for="countrySelector" class="form-label">
+                          Country of Residence
+                        </label>
+                        <div class="select-wrap">
+                          <select
+                            formControlName="country"
+                            name="country"
+                            class="form-input"
+                            class="is-invalid"
+                          >
+                            <option value="" selected="">
+                              Click to choose a Country
+                            </option>
+                            <option value="1">India</option>
+                            <option value="1">Bangladesh</option>
+                            <option value="1">Pakistan</option>
+                            <option value="1">Australia</option>
+                            <option value="1">China</option>
+                          </select>
+                          <div class="form-valid-error">
+                            <div class="error-msg">
+                              Please choose a country!
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group input-ico user">
+                        <label for="username" class="form-label">
+                          First Name
+                          <span>(Optional)</span>
+                        </label>
+                        <input
+                          formControlName="firstName"
+                          type="text"
+                          class="form-input"
+                          class="is-invalid"
+                          maxlength="30"
+                        />
+                      </div>
+                      <div class="form-group input-ico user">
+                        <label for="username" class="form-label">
+                          Last Name
+                          <span>
+                            (Optional)
+                          </span>
+                        </label>
+                        <input
+                          formControlName="lastName"
+                          type="text"
+                          class="form-input"
+                          class="is-invalid"
+                          maxlength="30"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <div class="terms-wrapper">
+                          <div data-style="check" class="cust-control">
+                            <input
+                              type="checkbox"
+                              formControlName="terms"
+                              id="checkbox1.1"
+                            />
+                            <label for="checkbox1.1"><i></i></label>
+                          </div>
+                          <div class="label-control">
+                            I accept the
+                            <a target="_blank" href="assets/terms-of-use.html"
+                              >Terms of Service.</a
+                            >
+                          </div>
+                          <div class="form-valid-error">
+                            <div class="error-msg">
+                              Please accept terms of service!
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row ng-captcha-container">
+                        <!-- Google captcha comes below -->
+                        <ngx-recaptcha2
+                          #captchaElem
+                          [siteKey]="siteKey"
+                          (load)="handleLoad()"
+                          (success)="handleSuccess($event)"
+                          formControlName="recaptcha"
+                          class="g-recaptcha"
+                        >
+                        </ngx-recaptcha2>
+                        <div class="form-valid-error">
+                          <div>
+                            Please confirm you are not a robot!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <button class="form-button create-account">
+                          Create My Account
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

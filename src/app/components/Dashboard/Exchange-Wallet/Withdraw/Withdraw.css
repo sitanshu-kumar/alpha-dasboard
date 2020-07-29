@@ -1,0 +1,41 @@
+/* for withdrawcoins css */
+.withdrawl-coin-send-button {
+  width: 40%;
+  text-align: center;
+}
+
+.withdrwal-form-holder {
+  display: flex;
+}
+
+.withdrwal-form-holder .form-body {
+  margin-left: 0;
+  min-width: 60%;
+  margin-right: unset;
+}
+
+.withdrwal-form-holder .form-body .form-container {
+  min-width: 90%;
+}
+
+.currency-balance-details.withdraw-coins-details {
+  margin: 1rem 0;
+}
+
+.withdrwal-form-holder .diamond-list {
+  margin-top: 2rem;
+  padding-left: 2rem;
+}
+
+.withdrwal-form-holder .diamond-list ul {
+  padding-right: 6rem;
+}
+
+.diamond-list .currency-balance-details.withdraw-coins-details {
+}
+
+@media (max-width: 670px) {
+  .withdrwal-form-holder {
+    flex-direction: column;
+  }
+}

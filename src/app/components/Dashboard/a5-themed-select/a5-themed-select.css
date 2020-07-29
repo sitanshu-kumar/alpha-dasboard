@@ -1,0 +1,87 @@
+ul {
+  list-style: none;
+}
+.a5-select-container {
+  position: relative;
+}
+
+.a5-select-input {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem;
+  padding-left: 1rem;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.a5-select-input::after {
+  content: ' ';
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  position: absolute;
+  margin: 1rem;
+  transform: rotate(45deg);
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  cursor: pointer;
+  right: 5px;
+  padding: 0.1rem;
+}
+
+.pull-up-arrow::after {
+  content: '';
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 1rem;
+  transform: rotate(225deg);
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  cursor: pointer;
+}
+
+.a5-select-input input {
+  color: black;
+  outline: none;
+  border: none;
+  width: 100%;
+  background-color: var(--light-dark-background);
+}
+
+.a5-select-input input::-webkit-input-placeholder {
+  color: var(--gold-pop);
+}
+
+.a5-select-list {
+  width: 100%;
+  position: absolute;
+  width: 100%;
+  border: 1px solid black;
+  background-color: white;
+  z-index: 100;
+  transition: all 0.1s ease-in;
+  overflow: auto;
+}
+
+.a5-select-list::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.a5-select-list li {
+  /* background-color: var(--dark-background); */
+  padding: 0.5rem;
+  position: relative;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 100;
+  text-align: left;
+}
+
+.a5-select-list li:hover {
+  background: gray;
+}
+
+#transfer-modal-balance {
+  margin-top: 8rem;
+}

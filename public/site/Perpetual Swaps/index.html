@@ -1,0 +1,746 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>Perpetual Swaps - Alpha5 Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.dfef4930.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.9412e2ab.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.eca31fed.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,400i,700%7CRubik&display=fallback">
+        <style>body,input{font-family:"Rubik","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Rubik","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="amber">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#perpetual-swaps" tabindex="0" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Alpha5 Documentation" aria-label="Alpha5 Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Alpha5 Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Perpetual Swaps
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="Alpha5 Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Alpha5 Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../General/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Contracts
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Contracts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Perpetual Swaps
+      </label>
+    
+    <a href="./" title="Perpetual Swaps" class="md-nav__link md-nav__link--active">
+      Perpetual Swaps
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funding-rate-calculation" class="md-nav__link">
+    Funding Rate Calculation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predictive-funding-rate-calculations" class="md-nav__link">
+    Predictive Funding Rate calculations:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contract-specification" class="md-nav__link">
+    Contract Specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mark-price-calculation" class="md-nav__link">
+    Mark Price Calculation
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Futures/" title="Futures" class="md-nav__link">
+      Futures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Futures%20Swaps/" title="Futures Swaps" class="md-nav__link">
+      Futures Swaps
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Fees/" title="Fees" class="md-nav__link">
+      Fees
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Order%20Types/" title="Order Types" class="md-nav__link">
+      Order Types
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../FAQs/" title="FAQs" class="md-nav__link">
+      FAQs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Custody/" title="Custody" class="md-nav__link">
+      Custody
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Product%20Pipeline/" title="Product Pipeline" class="md-nav__link">
+      Product Pipeline
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../A5T/" title="A5T" class="md-nav__link">
+      A5T
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Parimutuel%20Options/" title="Parimutuel Options" class="md-nav__link">
+      Parimutuel Options
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../API/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../MM/" title="Trading Opportunities" class="md-nav__link">
+      Trading Opportunities
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../OES/" title="OES" class="md-nav__link">
+      OES
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funding-rate-calculation" class="md-nav__link">
+    Funding Rate Calculation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predictive-funding-rate-calculations" class="md-nav__link">
+    Predictive Funding Rate calculations:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contract-specification" class="md-nav__link">
+    Contract Specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mark-price-calculation" class="md-nav__link">
+    Mark Price Calculation
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="perpetual-swaps">Perpetual Swaps</h1>
+<p>A Perpetual Swap is similar to a spot instrument, except that it is synthetic (no physical exchange), and allows for you to have leverage. It is also similar to a future in that it can diverge from the spot price (largely due to the leverage), but it does not have an expiration.</p>
+<p>To ensure that a Perpetual Swap mimics as close to a spot price (A5XBT Index) as possible, a Funding Rate is used. Generally speaking, continued periods of Perpetual Swap trading over the Index will lead to a higher (positive) funding rate, whereby longs are charged for the benefit of the shorts (who receive funding payments). Likewise, when the Perpetual Swap trades for a sustained period below the Index, longs will receive funding payments at the expense of shorts.</p>
+<p>Every 8 hours, a settlement will occur as per the prevailing funding rate, during which funds will either be paid or collected by any user that has an open position in the Perpetual Swap contract at that time.</p>
+<p>Funding will happen 3 times a day at 00:00 UTC, 08:00 UTC, and 16:00 UTC.</p>
+<p>The funding a trader has to pay or will collect is calculated as:</p>
+<p><strong>Funding = Position Value * Funding Rate</strong></p>
+<p>Here Position Value is given as: Number of Contracts (in BTC) * A5XBT Index Price</p>
+<p>If the rate is positive, longs (buyers) will pay the shorts (sellers). If the rate is negative, the shorts pay the longs.</p>
+<p>Funding is a net-zero operation for the exchange; it is payments being exchanged between buyers and sellers.</p>
+<p>The notification for funding paid/received shows under the Transaction History tab.</p>
+<h2 id="funding-rate-calculation">Funding Rate Calculation</h2>
+<p>A predictive funding rate for the next 8-hour cycle will be calculated every minute over the current 8-hour cycle. At the end of each cycle, a time-weighted average of the 480 predictive funding rate values (one value for each minute over an 8-hour interval) will be calculated, becoming the Funding Rate for the new cycle. </p>
+<h3 id="predictive-funding-rate-calculations">Predictive Funding Rate calculations:</h3>
+<p>The Funding Rate will have 2 components: The <strong>Interest Rate [I]</strong> and the <strong>Premium Index [P]</strong></p>
+<p>The Interest Rate is a highly varied figure. There is no consistent overnight cost of USD (or equivalent) and BTC in the industry, and hence this figure can be a fabrication, or a reliance on concentrated source(s). As a result, Alpha5 will look to amplify this figure, to create opportunities between varied rates across the industry. </p>
+<p>To do so, Alpha5 will reference the <a href="https://www.bitmex.com/app/index/.BXBT">.XBTBON Index</a>. The .XBTBON Index is now fixed at 0.03% per day. Alpha5 will be amplifying this value by 2, setting the Interest Rate permanently to <strong>0.06% per day</strong> (i.e. 0.02% for every 8-hour cycle.) </p>
+<p><strong>[I] = 0.02 %</strong> for all calculations. </p>
+<p>The Premium Index will be derived according to the following formula:</p>
+<p><strong>Premium Index [P] = ((Max (0, Bid Price - Mark Price) – Max (0, Mark Price – Ask Price))/ALPHA5 (BTC/USDT) Index Price) + Funding Rate of Current Interval</strong></p>
+<p>Where Mark Price is calculated as </p>
+<p><em>Funding Basis = Funding Rate of Current Interval * (Time Until Funding / Funding Interval)</em>
+<em>Mark Price    = Index Price * (1 + Funding Basis)</em></p>
+<p><strong>Funding Rate [F] = Premium Index [P] + clamp(Interest Rate [I] – Premium Index [P], 0.05%, -0.05%)</strong> </p>
+<p>Thus, if (I-P) is within +/- .05%, then F = P + (I-P) = I. If this is the case, F will equal I = 0.02%</p>
+<p><strong>Note:</strong> Funding Rate Cap: (Initial Margin – Maintenance Margin) * 25%</p>
+<h2 id="example">Example</h2>
+<p>Ex-i(a)</p>
+<pre><code>Let 
+
+Bid Price = 9675 USDT
+Ask Price = 9676 USDT
+BTC/USDT Index Price = 9671 USDT
+Funding Rate of Current Interval = 0.01%
+Time Until Funding = 4 hours
+
+Then, Mark Price:
+
+Funding Basis = 0.01% * (4/8) = 0.005% or 0.00005
+Mark Price = 9671 * (1+0.00005) = 9671.48
+
+Premium Index [P] = ((Max (0, 9675 - 9671.48) – Max (0, 9671.48 – 9676))/9671) + 0.01% 
+= (3.52/9671) + 0.0001 = 0.00036 + 0.0001 = 0.00046 or 0.046%
+
+Funding Rate [F] = 0.046% + clamp(0.02% – 0.046%, 0.05%, -0.50%) 
+= 0.046% + clamp(-0.026%, 0.05%, -0.05%) = 0.046% – 0.026% = 0.02%
+
+Since, -.05% ≤ (I-P) ≤+.05% for this F, F = I = 0.02%
+</code></pre>
+
+<p>Ex-i(b)</p>
+<pre><code>Let 
+
+Bid Price = 9675 USDT
+Ask Price = 9676 USDT
+BTC/USDT Index Price = 9686 USDT
+Funding Rate of Current Interval = -0.08%
+Time Until Funding = 6 hours
+
+Then, Mark Price: 
+Funding Basis = -0.08% * (6/8) = -0.06% or -0.0006
+Mark Price = 9686 * (1-0.0006) = 9680.19
+
+Premium Index [P] = ((Max (0, 9675 - 9680.19) – Max (0, 9680.19 – 9676))/9686) - 0.08% 
+= (-4.19/9686) - 0.0008 = -0.00043 - 0.0008 = -0.00123 or -0.123%
+
+Funding Rate [F] = -0.123% + clamp(0.02% – (-0.123%), 0.05%, -0.05%) 
+= -0.123% + clamp(0.143%, 0.05%, -0.05%) = -0.123% + 0.05% = -0.073%
+
+In this case, F is as is since I - P &gt; 0.05%
+
+</code></pre>
+
+<p>Ex-ii</p>
+<pre><code>It is 09:00. Alpha5’s funding rate at 16:00 is going to be +0.15%. 
+
+Meaning, any long position will pay that amount, and any short position will 
+receive the amount (prior to fees).  
+
+In this instance, if a trader is short 10 BTC contracts, and the price of 
+the XBT Perpetual Swap at 16:00 is 10,000 USDT, 
+he is due to receive a gross funding payment of (10*10000)*.0015 = 150 USDT.
+</code></pre>
+
+<h2 id="contract-specification">Contract Specification</h2>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Underlying Index</td>
+<td align="center">A5XBT Index</td>
+</tr>
+<tr>
+<td align="center">Symbol</td>
+<td align="center">XBTUSD</td>
+</tr>
+<tr>
+<td align="center">Contract Size</td>
+<td align="center">0.001 BTC</td>
+</tr>
+<tr>
+<td align="center">Instrument Type</td>
+<td align="center">Linear</td>
+</tr>
+<tr>
+<td align="center">Initial Margin</td>
+<td align="center">4%</td>
+</tr>
+<tr>
+<td align="center">Maintenance Margin</td>
+<td align="center">2%</td>
+</tr>
+<tr>
+<td align="center">Price Quotation</td>
+<td align="center">USDT per 1 BTC</td>
+</tr>
+<tr>
+<td align="center">Tick Size</td>
+<td align="center">0.5 USDT</td>
+</tr>
+<tr>
+<td align="center">P&amp;L Settlement</td>
+<td align="center">USDT</td>
+</tr>
+<tr>
+<td align="center">Expiration</td>
+<td align="center">None</td>
+</tr>
+<tr>
+<td align="center">Position-Limit</td>
+<td align="center">1000 BTC contracts</td>
+</tr>
+<tr>
+<td align="center">Order-Limit</td>
+<td align="center">TBD</td>
+</tr>
+<tr>
+<td align="center">Fees</td>
+<td align="center">0bps Maker. 5bps Taker.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mark-price-calculation">Mark Price Calculation</h2>
+<pre><code>Funding Basis = Funding Rate for Current Interval * (Time Until Funding / Funding Interval)
+
+Mark Price = Index Price * (1 + Funding Basis)
+</code></pre>
+
+<p>To increase limits, please contact <a href="mailto:support@alpha5.io"><strong>support@alpha5.io</strong></a></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../General/" title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Futures/" title="Futures" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Futures
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        return to
+        <a href="http://alpha5.io/#/" target="_blank" rel="noopener"><font size="4.5rem">Alpha5</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.73eb87c5.js"></script>
+      
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>

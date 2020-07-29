@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bitfex Trader</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> 
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> 
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body class="dashboard_body">
+
+  <nav class="navbar navbar-default main-navbar dashboard_header">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img src="images/logo.png" class="logo_img">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav dashboard_list">
+          <li class="">
+            <a href="#">Trade</a>
+          </li>
+          <li class="">
+            <a href="dashboard.html">Account</a>
+          </li>
+          
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right right_list">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle"></i>
+            </a>
+            <ul class="dropdown-menu right_logout">
+              <p class="user_email">anil.kumar@stigasoft.com</p>
+              <p class="user_logout"><a href="#"><i class="fa fa-sign-out-alt"></i>Log Out</a></p>
+              <div>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row dashboard_container dashboard_maincontainer">
+    <div class="col-md-2 sidebar_container">
+        <div class="account_menu">
+            <ul class="nav navbar-nav sidebar_nav">
+                <li class="nav-item subdrop sidedropdown ">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#walletsidebar" aria-expanded="false">
+                        <i class="fa fa-wallet icon-main"></i>
+                    <span class="nav-link-text"> Wallet</span>
+                     <!-- <i class="fa fa-chevron-up up"></i> -->
+                     <i class="fa fa-chevron-down down"></i>
+                       
+
+                    </a>
+                    <ul id="walletsidebar" class="collapse sidebarlist" style="">
+                        <li class="nav-item active">
+                            <a href="balances.html" class="nav-link">Balances</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="deposit.html" class="nav-link">Deposit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="address.html" class="nav-link">Address</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="withdraw.html" class="nav-link">Withdraw</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item subdrop sidedropdown">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountsidebar" aria-expanded="false">
+                   <i class="fa fa-user icon-main"></i>
+                    <span class="nav-link-text">Account & Preferences</span>
+                    <!-- <i class="fa fa-chevron-up up"></i> -->
+                    <i class="fa fa-chevron-down down"></i>
+                    </a>
+                    <ul id="accountsidebar" class="collapse sidebarlist" style="">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link">My Profile </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="security.html" class="nav-link">Security</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="affiliate.html" class="nav-link">Affiliate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="apiSecret.html" class="nav-link">Get Api Secret</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item subdrop sidedropdown">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#historysidebar" aria-expanded="false">
+                    <i class="fa fa-history icon-main" aria-hidden="true"></i>
+                    <span class="nav-link-text">History</span>
+                    <!-- <i class="fa fa-chevron-up up"></i> -->
+                    <i class="fa fa-chevron-down down"></i>
+                    </a>
+                    <ul id="historysidebar" class="collapse sidebarlist" style="">
+                        <li class="nav-item">
+                            <a href="tradeHistory.html" class="nav-link">Trade History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="orderHistory.html" class="nav-link">Order History</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10 contentcontainer">
+        <div class="wallet_container">
+            <h4 class="content_heading">Balances</h4>
+            <p class="preferences_account">WALLET / <span>BALANCES</span></p>
+            <div class="row account_detail">
+                <div class="col-md-12 balance_container">
+                    <div class="">
+                        <h4 class="account_tableheading">Balances</h4>
+                        <div class="entries_container">
+                            <div class="balance_div">
+                                <p class="entries">Show</p>
+                                <ul class="nav entries">
+                                    <li class="dropdown">
+                                    <button aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span id="selected">10</span><span class="caret"></span></button>
+                                    <ul class="dropdown-menu number_listcontainer">
+                                        <li><a href="#">10</a></li>
+                                        <li><a href="#">25</a></li>
+                                        <li><a href="#">50</a></li>
+                                        <li><a href="#">100</a></li>
+                                        <div>
+                                    </ul>
+                                    </li>
+                                </ul>
+                                <p class="entries">Entries</p>
+                            </div>
+                            <div class="search_div">
+                                <form action="/action_page.php">
+                                    <label for="fname">Search</label>
+                                    <input type="text" id="fname" name="fname">
+                                </form>
+                            </div>
+                        </div>
+                        
+                        </div>
+                        <div class="clear-fix"></div>
+                        <div class="table-responsive">
+                            <Table class="table balances_table table-striped dashboard_table">
+                                <tr>
+                                    <th>Balances</th>
+                                    <th>Open P/L</th>
+                                    <th>P/L</th>
+                                    <th>Net Asset Value</th>
+                                    <th>Used Margin</th>
+                                    <th>Available Margin</th>
+                                </tr>
+                                <tr>
+                                    <td>100000.58319937</td>
+                                    <td>-0.05166684</td>
+                                    <td>0.00020265</td>
+                                    <td>100000.53173519</td>
+                                    <td>0.08232994</td>
+                                    <td>100000.44940525</td>
+                                </tr>
+                            </Table>
+                        </div>
+                        <div class="page_of_page">
+                            <span class="onetoone">1 to 1 of 1</span>
+                            <span>
+                                <span><i class="fa fa-chevron-left"></i><i class="fa fa-arrow-to-left"></i></span>
+                                <span class="pageofpage">Page 1of 1</span>
+                                <span><i class="fa fa-chevron-right"></i><i class="fa fa-arrow-to-right"></i></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row footer_container">
+      <div class="container">
+        <div class="col-md-4 footer_heading">
+            <img src="images/logo.png" class="logo_img">
+            <p class="footer_text">Bitfex is a Crypto Derivatives Exchange, 
+            providing traders a diverse range of trading products, 
+            a highly secure and intuitive trading interface. 
+            Bitfex is owned by Ananta Global, registered in Seychelles.</p>
+        </div>
+        <div class="col-md-3 footer_heading">
+            <h3>ABOUT</h3>
+            <ul class="footer_list">
+                <li>About Us</li>
+                <li>Privacy Policy</li>
+                <li>Terms of Use</li>
+            </ul>
+        </div>
+        <div class="col-md-3 footer_heading">
+            <h3>CONTACT US</h3>
+            <ul class="footer_list">
+                <li>
+                    <span>Investors:</span>
+                    <p>investment@idap.io</p>
+                </li>
+                <li>
+                    <span>Queries:</span>
+                    <p>info@bitfex.com</p>
+                </li>
+            </ul>
+        
+        </div>
+        <div class="col-md-2 footer_heading footer_icon">
+            <h3>SOCIAL</h3>
+            <ul class="footer_list">
+                <li><i class="fa fa-telegram"></i></li>
+                <li><i class="fa fa-twitter"></i></li>
+                <li><i class="fa fa-linkedin"></i></li>
+            </ul>
+            <ul class="footer_list">
+                <li><i class="fa fa-facebook-f"></i></li>
+                <li><i class="fa fa-instagram"></i></li>
+                <li><i class="fa fa-youtube"></i></li>
+            </ul>
+        </div>
+    </div>
+ </div>
+ <div class="row footer_copyright">
+    <div class="container">
+      <div class="col-md-6 footer_heading">
+          <p class="footer_text"> Copyright © 2019 Bitfex, All Right Reserved </p>
+      </div>
+      <div class="col-md-6 footer_heading power_by">
+          <p class="footer_text"> Powered By <span></span>idap.io</p>
+      </div>
+  </div>
+</div>
+
+<script>
+
+$('.dropdown-menu a').click(function(){
+    $('#selected').text($(this).text());
+  });
+</script>
+
+
+</body>
+</html>

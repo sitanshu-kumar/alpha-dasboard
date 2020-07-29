@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="frm-wrapper">
+        <section class="frm-block">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="frm-outer">
+                  <ul class="frm-tabs">
+                    <li>
+                      <a href="javascript:;" class="active"> Log In</a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        Register
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="frm-body">
+                    <form>
+                      <div class="auth-error">
+                        <p>{error from server}</p>
+                      </div>
+                      <div class="form-group input-ico email">
+                        <label for="emailAddress" class="form-label">
+                          Email
+                        </label>
+                        <input
+                          class="form-input"
+                          formControlName="email"
+                          type="text"
+                          class="is-invalid"
+                          maxlength="50"
+                        />
+                        <div class="form-valid-error">
+                          <div class="error-msg">
+                            Please enter your valid username or email!
+                          </div>
+                          <div class="error-msg">
+                            Username is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group input-ico pwd">
+                        <label for="password" class="form-label">
+                          Password
+                        </label>
+                        <input
+                          class="form-input"
+                          formControlName="password"
+                          type="password"
+                          class="is-invalid"
+                          maxlength="20"
+                        />
+                        <div class="form-valid-error">
+                          <div>
+                            Password is required!
+                          </div>
+                          <div>
+                            Password should be minimum of {length} characters!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group input-ico ga">
+                        <label class="form-label">
+                          Two-Factor Code (if enabled)
+                        </label>
+                        <input
+                          type="text"
+                          formControlName="factorCode"
+                          class="form-input"
+                          placeholder="Google Authenticator"
+                          maxlength="6"
+                        />
+                      </div>
+                      <div class="form-group row ng-captcha-container">
+                        <!-- Google Captcha here -->
+                        <ngx-recaptcha2
+                          #captchaElem
+                          [siteKey]="siteKey"
+                          (load)="handleLoad()"
+                          (success)="handleSuccess($event)"
+                          formControlName="recaptcha"
+                          class="g-recaptcha"
+                        >
+                        </ngx-recaptcha2>
+                        <div class="form-valid-error">
+                          <div>
+                            Please confirm you are not a robot!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <button class="form-button login-btn" type="submit">
+                          Log In
+                        </button>
+                      </div>
+                      <div class="frm-footer">
+                        <div class="sign">
+                          <a href="#">
+                            Forgot Password or Two-Factor Device?
+                          </a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
