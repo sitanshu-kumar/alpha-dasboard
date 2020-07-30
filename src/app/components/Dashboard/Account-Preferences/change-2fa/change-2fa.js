@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {getCurrentProfile} from '../../../../redux/actions/profileActions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getCurrentProfile } from '../../../../redux/actions/profileActions';
 import QRCode from 'qrcode.react';
-import {compose} from 'redux';
-import {responseMsg} from './chnage-2fa_Dispatcher';
+import { compose } from 'redux';
+import { responseMsg } from './chnage-2fa_Dispatcher';
 
 import store from '../../../../Redux_Store/store';
-import {change2faApi} from './change_2fa_API';
-import {withAlert} from 'react-alert';
+import { change2faApi } from './change_2fa_API';
+import { withAlert } from 'react-alert';
 import './change-2fa.css';
 
 class Change2FA extends Component {
@@ -29,7 +29,7 @@ class Change2FA extends Component {
   componentWillReceiveProps = (nextProps) => {
     console.log('nextProps', nextProps);
     if (nextProps.faState.secret_key_response_msg)
-      this.setState({showQR: false});
+      this.setState({ showQR: false });
     /*console.log('nextProps', nextProps);
     const {secret_key_response_msg} = this.props.faState;
     if (
@@ -45,25 +45,25 @@ class Change2FA extends Component {
 
   handleMFACode = (e) => {
     let val = e.target.value;
-    this.setState({mfa_for_enabling: val, error: ''});
+    this.setState({ mfa_for_enabling: val, error: '' });
   };
 
   copyText = () => {
     this.copyRef.current.select();
     document.execCommand('copy');
     this.copyRef.current.focus();
-    this.setState({copied: true});
+    this.setState({ copied: true });
     setTimeout(() => {
-      this.setState({copied: false});
+      this.setState({ copied: false });
     }, 3000);
   };
 
   changeMFAStatus = (bool) => {
     let token_2fa = this.state.mfa_for_enabling;
     if (token_2fa.length < 6)
-      this.setState({error: 'Token must be greater than 6 digits'});
+      this.setState({ error: 'Token must be greater than 6 digits' });
     else {
-      const data = {token_2fa, enabled_2fa: bool};
+      const data = { token_2fa, enabled_2fa: bool };
       change2faApi.changeMFAStatus(data);
     }
   };
@@ -73,7 +73,7 @@ class Change2FA extends Component {
   render() {
     const Profile = this.props.heading;
     let link = '';
-    const {enabled_2fa, email} = this.props.profile.profile;
+    const { enabled_2fa, email } = this.props.profile.profile;
     if (this.props.faState.secret_key_2fa) {
       link = `otpauth://totp/Alpha5(${email})/?secret=${this.props.faState.secret_key_2fa}`;
     }
@@ -101,28 +101,28 @@ class Change2FA extends Component {
             <div className="balance-ga-notice mt-5 mb-5 d-flex w-80">
               <img src={'db-assets/google-authenticator-2 1.svg'} />
               <p>
-                <span style={{color: 'var(--gold-pop)'}}>
+                <span style={{ color: 'var(--gold-pop)' }}>
                   Google Authenticator
                 </span>
                 to verify your account every time you sign in
               </p>
               {!enabled_2fa ? (
                 <button
-                  onClick={() => this.setState({showQR: true})}
+                  onClick={() => this.setState({ showQR: true })}
                   className="form-btn yellow"
                 >
                   ENABLE
                 </button>
               ) : (
-                <button
-                  onClick={() => this.setState({showQR: true})}
-                  className="form-btn yellow"
-                >
-                  DISABLE
-                </button>
-              )}
+                  <button
+                    onClick={() => this.setState({ showQR: true })}
+                    className="form-btn yellow"
+                  >
+                    DISABLE
+                  </button>
+                )}
             </div>
-            {this.state.showQR && !enabled_2fa ? (
+            {this.state.showQR && this.props.faState.secret_key_2fa && !enabled_2fa ? (
               <div className="qr-container ga-secure-code ml-auto mr-auto d-flex">
                 <QRCode includeMargin={true} size={200} value={link} />
                 <div className="qr-result">
@@ -140,8 +140,8 @@ class Change2FA extends Component {
                     {this.state.copied ? (
                       <span className="text-success">Copied !!</span>
                     ) : (
-                      <></>
-                    )}
+                        <></>
+                      )}
                   </div>
                   <p>
                     If you are unable to scan this QR Code, please insert this
@@ -150,8 +150,8 @@ class Change2FA extends Component {
                 </div>
               </div>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
             {this.state.showQR ? (
               <div className="d-flex flex-column align-items-center w-40 ml-auto mr-auto">
                 <div className="a5-login-field w-80">
@@ -173,20 +173,20 @@ class Change2FA extends Component {
                       </button>
                     </>
                   ) : (
-                    <>
-                      <button
-                        onClick={() => this.changeMFAStatus(false)}
-                        className="form-btn yellow"
-                      >
-                        Disable 2FA
+                      <>
+                        <button
+                          onClick={() => this.changeMFAStatus(false)}
+                          className="form-btn yellow"
+                        >
+                          Disable 2FA
                       </button>
-                    </>
-                  )}
+                      </>
+                    )}
                 </div>
               </div>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
           </div>
         </div>
       </>

@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import {compose} from 'redux';
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import './Login.css';
 import isEmpty from '../../validation/is-empty';
-import {connect} from 'react-redux';
-import {clearErrors} from '../../redux/actions/errorActions';
+import { connect } from 'react-redux';
+import { clearErrors } from '../../redux/actions/errorActions';
 import PropTypes from 'prop-types';
 import ConfirmEmailModal from '../confirm-email-code/confirm-email';
-import {loginAPI} from './Login_Api';
-import {withAlert} from 'react-alert';
+import { loginAPI } from './Login_Api';
+import { withAlert } from 'react-alert';
+import store from '../../Redux_Store/store'
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 );
@@ -67,23 +68,23 @@ class Login extends Component {
       this.props.alert.error('Email Verification Failed');
   };
 
-  componentDidUpdate = () => {
-    if (!isEmpty(this.props.loggedInSucessful)) {
-      this.props.alert.error(this.props.loggedInSucessful);
-    }
-  };
+  // componentDidUpdate = (prevProps) => {
+  //   if (!isEmpty(this.props.loggedInSucessful)) {
+  //     this.props.alert.error(this.props.loggedInSucessful);
+  //   }
+  // };
 
   allowSubmission = () => {
-    const {emailError, passwordError, twoFactorCodeError, isDirty} = this.state;
+    const { emailError, passwordError, twoFactorCodeError, isDirty } = this.state;
     return !(emailError || passwordError || twoFactorCodeError) && isDirty;
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    const {email, password, twoFactorCode} = this.state;
+    const { email, password, twoFactorCode } = this.state;
     const token_2fa = twoFactorCode;
     if (this.allowSubmission()) {
-      loginAPI.loginUser({email, password, token_2fa});
+      loginAPI.loginUser({ email, password, token_2fa });
     } else {
       let emailError = '';
       let passwordError = '';
@@ -115,8 +116,8 @@ class Login extends Component {
       emailError = 'Please enter a valid email!';
     }
     this.props.clearErrors();
-
-    this.setState({emailError, email, formError: '', isDirty: true});
+    store.dispatch({ type: 'LOGIN_FAILED', payload: null })
+    this.setState({ emailError, email, formError: '', isDirty: true });
   };
 
   handlePasswordInput = (e) => {
@@ -127,21 +128,23 @@ class Login extends Component {
       passwordError = 'Password is required !';
     }
     this.props.clearErrors();
-    this.setState({password, passwordError, formError: '', isDirty: true});
+    store.dispatch({ type: 'LOGIN_FAILED', payload: null })
+    this.setState({ password, passwordError, formError: '', isDirty: true });
   };
 
   handle2FAInput = (e) => {
     e.preventDefault();
+    store.dispatch({ type: 'LOGIN_FAILED', payload: null })
     let twoFactorCode = e.target.value;
     let twoFactorCodeError = '';
     if (twoFactorCode && twoFactorCode.length != 6)
       twoFactorCodeError = 'Need 6 Digits Exactly';
     else twoFactorCodeError = '';
-    this.setState({twoFactorCode, twoFactorCodeError, formError: ''});
+    this.setState({ twoFactorCode, twoFactorCodeError, formError: '' });
   };
 
   hideEmailModal = () => {
-    this.setState({showEmailVerificationModal: false});
+    this.setState({ showEmailVerificationModal: false });
   };
 
   submitEmailVerificationCode = (token) => {
@@ -161,8 +164,8 @@ class Login extends Component {
             {this.state.formError ? (
               <h3 className="error">{this.state.formError}</h3>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
             <div id="login-form" className="form-container">
               <div className="a5-login-field">
                 <input
@@ -220,8 +223,8 @@ class Login extends Component {
             onSubmit={this.submitEmailVerificationCode}
           />
         ) : (
-          <></>
-        )}
+            <></>
+          )}
       </>
     );
   }

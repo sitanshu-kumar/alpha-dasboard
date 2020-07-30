@@ -48,7 +48,7 @@ class LoginAPI {
       }
     } catch (er) {
       console.log('error', er);
-      store.dispatch({type: 'LOGIN_FAILED'});
+      store.dispatch({ type: 'LOGIN_FAILED', payload: true });
     }
   };
 
@@ -57,20 +57,20 @@ class LoginAPI {
   verifyEmail = async (emailID, token) => {
     try {
       const value = await API.get('/users/confirm', {
-        params: {email: emailID, token},
+        params: { email: emailID, token },
       });
 
-      const {jwt, email, first_name, last_name} = value.data;
+      const { jwt, email, first_name, last_name } = value.data;
       localStorage.setItem('token', jwt);
       setAuthToken(jwt);
       const decoded = jwt_decode(jwt);
 
       // dispatch method for response  for set current user
       store.dispatch(setCurrentUser(decoded, email, first_name, last_name));
-      store.dispatch({type: 'EMAIL_VERIFICATION_STATUS', payload: true});
+      store.dispatch({ type: 'EMAIL_VERIFICATION_STATUS', payload: true });
     } catch (er) {
       console.log(er);
-      store.dispatch({type: 'EMAIL_VERIFICATION_STATUS', payload: false});
+      store.dispatch({ type: 'EMAIL_VERIFICATION_STATUS', payload: false });
     }
   };
 

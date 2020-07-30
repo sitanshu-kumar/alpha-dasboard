@@ -63,28 +63,27 @@ export default function (state = initialState, action) {
       };
 
     case SET_RESET_PASSWORD_EMAIL:
-      return {...state, resetPasswordEmail: action.payload};
+      return { ...state, resetPasswordEmail: action.payload };
 
     case 'SET_LOGIN_SUCCESS':
-      return {...state, loggedInSucessful: action.payload};
+      return { ...state, loggedInSucessful: action.payload };
 
     case 'EMAIL_VERIFICATION_SEND_SUCCESS':
-      return {...state, emailVerificationSend: action.payload};
+      return { ...state, emailVerificationSend: action.payload };
 
     case 'EMIL_FOR_RESET_PASSWORD':
-      return {...state, userEmail: action.payload};
+      return { ...state, userEmail: action.payload };
 
     case 'PASSWORD_RESETED_SUCCESS':
-      return {...state, passwordReset: true};
+      return { ...state, passwordReset: true };
 
     case 'EMAIL_EXIST':
-      return {...state, emailExist: action.payload};
+      return { ...state, emailExist: action.payload };
 
     case 'EMAIL_VERIFICATION_STATUS':
-      return {...state, emailVerification: action.payload};
+      return { ...state, emailVerification: action.payload };
     case 'LOGIN_FAILED':
-      return {...state, loginFailed: true};
-
+      return { ...state, loginFailed: action.payload };
     default:
       return state;
   }
