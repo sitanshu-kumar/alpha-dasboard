@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {passwordResetted} from '../../redux/actions/authActions';
-import axios from 'axios';
+import {resetPasswordAPI} from './Reset-PasswordApi';
 import {BaseApiUrl} from '../../redux/config';
 
 const validPassword = RegExp(
@@ -33,6 +33,8 @@ class ResetPasswordForm extends Component {
     if (nextProps.auth.resetPasswordEmail != this.state.email) {
       this.setState({email: nextProps.auth.resetPasswordEmail});
     }
+    if (nextProps.auth.passwordReset === true)
+      this.props.history.push('/login');
   };
 
   passworHandler = (e) => {
@@ -83,11 +85,20 @@ class ResetPasswordForm extends Component {
   };
 
   resetPassword = () => {
-    const {email, password, confirmPass, token} = this.state;
+    const {password, confirmPass, token} = this.state;
+    const email = this.props.auth.userEmail;
     const password_confirmation = confirmPass;
     let url = BaseApiUrl + '/users/reset_password';
     if (this.allowSubmit()) {
-      if (this.state.email) {
+      const UserPasswordDetails = {
+        email: email,
+        token: token,
+        password: password,
+        password_confirmation: confirmPass,
+      };
+      resetPasswordAPI.resetPassword(UserPasswordDetails);
+
+      /* if (this.state.email) {
         axios
           .post(url, {email, password, password_confirmation, token})
           .then((res) => {
@@ -100,16 +111,15 @@ class ResetPasswordForm extends Component {
               let {data} = er.response;
               this.setState({formError: 'Invalid Code!', errored: true});
             }
-          });
-      } else {
-        this.setState({
-          formError: 'Some error occured please retry!',
-          errored: true,
-        });
-        setTimeout(() => {
-          this.props.history.push('/reset-password');
-        }, 3000);
-      }
+          });*/
+    } else {
+      this.setState({
+        formError: 'Some error occured please retry!',
+        errored: true,
+      });
+      setTimeout(() => {
+        this.props.history.push('/reset-password');
+      }, 3000);
     }
   };
 
@@ -119,6 +129,7 @@ class ResetPasswordForm extends Component {
 
   render() {
     const {resetted, errored} = this.state;
+
     return (
       <>
         <div className="dark-bg dark-body">
@@ -191,4 +202,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, {passwordResetted})(ResetPasswordForm);
+export default connect(mapStateToProps, {passwordResetted})(
+  withRouter(ResetPasswordForm),
+);

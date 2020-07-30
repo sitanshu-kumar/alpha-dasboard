@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {logoutUser} from '../../../redux/actions/authActions';
+import {loginAPI} from '../../Login/Login_Api';
 import _ from 'lodash';
 
 class Header extends Component {
@@ -198,7 +199,7 @@ class Header extends Component {
                     Resources
                   </a>
 
-                  <a onClick={this.props.logoutUser} className="logout-btn">
+                  <a onClick={loginAPI.logout()} className="logout-btn">
                     <i className="fas fa-sign-out-alt"></i>
                     Logout
                   </a>

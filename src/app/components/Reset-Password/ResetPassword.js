@@ -4,6 +4,7 @@ import axios from 'axios';
 import {BaseApiUrl} from '../../redux/config';
 import {goToResetPasswordForm} from '../../redux/actions/authActions';
 import {connect} from 'react-redux';
+import {resetPasswordAPI} from './Reset-PasswordApi';
 
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
@@ -29,24 +30,25 @@ export class ResetPassword extends Component {
     this.setState({email, emailError});
   };
 
-  submit = () => {
+  componentWillReceiveProps(nextProps) {
+    console.log('props', nextProps);
+    if (nextProps.auth.emailVerificationSend == true)
+      this.props.history.push('/password-change');
+  }
+  submit = (e) => {
+    e.preventDefault();
     const {email, emailError} = this.state;
-    if (!emailError) {
-      axios
-        .get(BaseApiUrl + '/users/forgot_password', {
-          params: {email},
-        })
-        .then((res) => {
-          let {data} = res;
-          if (data.email == email) {
-            // this.props.history.push('/password-change');
-            this.props.goToResetPasswordForm(email, this.props.history);
-          }
-        })
-        .catch((er) => {
-          if (er.response)
-            this.props.goToResetPasswordForm(email, this.props.history);
-        });
+    if (email) {
+      resetPasswordAPI.getEmailVerificationCode(email);
+    } else {
+      let emailError = '';
+      if (!email) {
+        emailError = "don't left blank";
+      } else if (!validEmailRegex.test(email))
+        emailError = 'Please Enter a Valid Email !';
+      this.setState({
+        emailError,
+      });
     }
   };
 
@@ -98,7 +100,9 @@ export class ResetPassword extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
 export default connect(mapStateToProps, {goToResetPasswordForm})(
   withRouter(ResetPassword),

@@ -3,12 +3,11 @@ import jwt_decode from 'jwt-decode';
 import store from '../../../../Redux_Store/store';
 import API from '../../../../Redux_Store/newConfig';
 import setAuthToken from '../../../../utils/setAuthToken';
-
 import {
   getCurrentProfile,
   setSecretKey,
-  setError,
   setSecretKeyError,
+  secretResponse,
 } from './chnage-2fa_Dispatcher';
 
 class Change2faApi {
@@ -28,13 +27,26 @@ class Change2faApi {
       if (value) {
         this.getCurrentProfile();
         this.getSecretKeyFor2FA();
+        store.dispatch(setSecretKeyError('Sucessfully Updated !!'));
+        store.dispatch(secretResponse());
       }
     } catch (er) {
       let data = er.response.data;
       if (data.type == 'invalid_data')
-        store.dispatch(setError('Invalid Token!'));
-      else store.dispatch(setError('Something Went Wrong!'));
+        store.dispatch(setSecretKeyError('Invalid Token!'));
+      else store.dispatch(setSecretKeyError('Something Went Wrong!'));
     }
+    /* API.post('/users/change_2fa_status', data)
+      .then((res) => {
+        this.getCurrentProfile();
+        this.getSecretKeyFor2FA();
+      })
+      .catch((er) => {
+        let data = er.response.data;
+        if (data.type == 'invalid_data')
+          store.dispatch(setError('Invalid Token!'));
+        else store.dispatch(setError('Something Went Wrong!'));
+      });*/
   };
 
   getSecretKeyFor2FA = async () => {

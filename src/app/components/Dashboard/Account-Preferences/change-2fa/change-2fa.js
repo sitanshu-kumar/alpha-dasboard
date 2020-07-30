@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import {getCurrentProfile} from '../../../../redux/actions/profileActions';
 import QRCode from 'qrcode.react';
 import {compose} from 'redux';
-import isEmpty from '../../../../validation/is-empty';
-import {BaseApiUrl} from '../../../../redux/config';
+import {responseMsg} from './chnage-2fa_Dispatcher';
+
+import store from '../../../../Redux_Store/store';
 import {change2faApi} from './change_2fa_API';
 import {withAlert} from 'react-alert';
 import './change-2fa.css';
@@ -25,10 +26,18 @@ class Change2FA extends Component {
     });
   };
 
-  /* static getDerivedStateFromProps = (prev, newprops) => {
-    console.log(newprops);
-    return {...prev, error: newprops.error};
-  };*/
+  componentWillReceiveProps = (nextProps) => {
+    console.log('nextProps', nextProps);
+    if (nextProps.faState.secret_key_response_msg)
+      this.setState({showQR: false});
+    /*console.log('nextProps', nextProps);
+    const {secret_key_response_msg} = this.props.faState;
+    if (
+      nextProps.faState.secret_key_response_msg !==
+      this.props.faState.secret_key_response_msg
+    )
+      this.props.alert.show(nextProps.faState.secret_key_response_msg);*/
+  };
 
   getSecretKeyFor2FA = () => {
     change2faApi.getSecretKeyFor2FA();
@@ -50,19 +59,24 @@ class Change2FA extends Component {
   };
 
   changeMFAStatus = (bool) => {
-    let url = BaseApiUrl + '/users/change_2fa_status';
     let token_2fa = this.state.mfa_for_enabling;
-    const data = {token_2fa, enabled_2fa: bool};
-    change2faApi.changeMFAStatus(data);
+    if (token_2fa.length < 6)
+      this.setState({error: 'Token must be greater than 6 digits'});
+    else {
+      const data = {token_2fa, enabled_2fa: bool};
+      change2faApi.changeMFAStatus(data);
+    }
   };
 
   copyRef = React.createRef();
 
   render() {
     const Profile = this.props.heading;
+    let link = '';
     const {enabled_2fa, email} = this.props.profile.profile;
-    console.log(this.props.faState);
-    const link = `otpauth://totp/Alpha5(${email})/?secret=${this.props.faState.secret_key_2fa}`;
+    if (this.props.faState.secret_key_2fa) {
+      link = `otpauth://totp/Alpha5(${email})/?secret=${this.props.faState.secret_key_2fa}`;
+    }
 
     return (
       <>

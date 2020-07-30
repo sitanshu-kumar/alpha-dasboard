@@ -17,9 +17,15 @@ const initialState = {
   user: {},
   showEmailVerificationModal: false,
   loggedInSucessful: null,
+  emailVerificationSend: null,
+  userEmail: null,
+  passwordReset: null,
+  emailExist: null,
+  loginFailed: null,
 };
 
 export default function (state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
@@ -61,6 +67,23 @@ export default function (state = initialState, action) {
 
     case 'SET_LOGIN_SUCCESS':
       return {...state, loggedInSucessful: action.payload};
+
+    case 'EMAIL_VERIFICATION_SEND_SUCCESS':
+      return {...state, emailVerificationSend: action.payload};
+
+    case 'EMIL_FOR_RESET_PASSWORD':
+      return {...state, userEmail: action.payload};
+
+    case 'PASSWORD_RESETED_SUCCESS':
+      return {...state, passwordReset: true};
+
+    case 'EMAIL_EXIST':
+      return {...state, emailExist: action.payload};
+
+    case 'EMAIL_VERIFICATION_STATUS':
+      return {...state, emailVerification: action.payload};
+    case 'LOGIN_FAILED':
+      return {...state, loginFailed: true};
 
     default:
       return state;

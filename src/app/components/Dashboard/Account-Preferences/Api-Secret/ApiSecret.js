@@ -68,6 +68,7 @@ export class ApiSecret extends Component {
 
   showMFAModal = (e) => {
     this.setState({show2faForGenerate: true});
+    apiSecretKeyAPI.getEmailVerificationCode(this.props.profile.profile.email);
   };
 
   hideMFAModal = (e) => {
@@ -80,6 +81,9 @@ export class ApiSecret extends Component {
 
   hideKeyPairModal = (e) => {
     this.setState({openKeyPairModal: false});
+  };
+  handleAddAPIKey = (value) => {
+    apiSecretKeyAPI.getNewKeyAndSecret(value);
   };
 
   deleteKey = (id, name) => {
@@ -222,6 +226,7 @@ export class ApiSecret extends Component {
           <MFAModal
             hideMFAModal={this.hideMFAModal}
             validateFor={'generateApiKeys'}
+            valueFromComponent={(value) => this.handleAddAPIKey(value)}
           />
         ) : (
           <></>
@@ -235,6 +240,7 @@ export class ApiSecret extends Component {
           <MFAModal
             hideMFAModal={this.hideMFAModal}
             validateFor={'deleteApiKeys'}
+            valueFromComponent={(value) => this.handleDeleteAPIKey(value)}
           />
         ) : (
           <></>

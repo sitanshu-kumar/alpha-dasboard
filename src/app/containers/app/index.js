@@ -13,7 +13,7 @@ import {Provider} from 'react-redux';
 import store from '../../Redux_Store/store';
 
 const options = {
-  timeout: 1000,
+  timeout: 2000,
   position: positions.TOP_CENTER,
 };
 

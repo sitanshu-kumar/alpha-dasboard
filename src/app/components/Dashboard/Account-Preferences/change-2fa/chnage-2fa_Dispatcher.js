@@ -17,7 +17,7 @@ export const setSecretKeyError = (data) => ({
 });
 
 // eslint-disable-next-line camelcase
-export const setError = (data) => ({
-  type: 'SET_SECRET_KEY_ERROR',
-  payload: 'invalid',
+export const secretResponse = () => ({
+  type: 'SECRET_KEY_UPDATE_STATUS',
+  payload: true,
 });

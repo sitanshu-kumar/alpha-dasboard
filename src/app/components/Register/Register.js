@@ -55,6 +55,7 @@ export class Register extends Component {
   };
 
   componentWillReceiveProps = (newProps) => {
+    console.log(newProps);
     if (
       newProps.auth.showEmailVerificationModal !=
       this.state.showEmailVerificationModal
@@ -66,9 +67,16 @@ export class Register extends Component {
     } else if (newProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard/account');
     }
-    if (!isEmpty(newProps.errors) && !this.state.formError) {
-      this.props.alert.error('Something Went wrong !!');
+
+    if (newProps.auth.emailExist === true)
+      this.props.alert.error('Email ID already Exist! Try Login');
+
+    if (newProps.auth.emailVerification === true) {
+      this.props.alert.success('Email verified Sucessfully');
+      this.props.history.push('/dashboard/account');
     }
+    if (newProps.auth.emailVerification === false)
+      this.props.alert.error('Email Verification Failed');
   };
 
   onSubmit = () => {
@@ -189,7 +197,7 @@ export class Register extends Component {
   passwordHandle = (e) => {
     let password = e.target.value;
     let passwordErr = '';
-    if (!password) passwordErr = 'Password Required !';
+    if (!password) passwordErr = 'Password Required!';
     else if (password.length <= 8)
       passwordErr = 'Password must be at least 8 characters !';
     else if (!validPassword.test(password))
@@ -231,7 +239,7 @@ export class Register extends Component {
   };
 
   submitEmailVerificationCode = (token) => {
-    this.props.verifyEmail(token, this.state.email);
+    registerAPI.verifyEmail(this.state.email, token);
   };
 
   componentWillUnmount = () => {

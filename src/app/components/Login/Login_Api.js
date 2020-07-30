@@ -48,15 +48,17 @@ class LoginAPI {
       }
     } catch (er) {
       console.log('error', er);
-      store.dispatch(setError('Invalid Credentials !!'));
+      store.dispatch({type: 'LOGIN_FAILED'});
     }
   };
 
   // function for user email verification
 
-  verifyEmail = async (token, email) => {
+  verifyEmail = async (emailID, token) => {
     try {
-      const value = await API.get('/users/confirm', {params: {email, token}});
+      const value = await API.get('/users/confirm', {
+        params: {email: emailID, token},
+      });
 
       const {jwt, email, first_name, last_name} = value.data;
       localStorage.setItem('token', jwt);
@@ -65,11 +67,20 @@ class LoginAPI {
 
       // dispatch method for response  for set current user
       store.dispatch(setCurrentUser(decoded, email, first_name, last_name));
+      store.dispatch({type: 'EMAIL_VERIFICATION_STATUS', payload: true});
     } catch (er) {
-      if (er.response.data) store.dispatch(setError(er));
+      console.log(er);
+      store.dispatch({type: 'EMAIL_VERIFICATION_STATUS', payload: false});
     }
   };
 
+  logout = () => {
+    localStorage.removeItem('token');
+    document.title = 'Alpha5';
+    store.dispatch({
+      type: 'LOGOUT',
+    });
+  };
   hideEmailVerification = () => {
     store.dispatch(hideEmailVerification());
   };

@@ -56,12 +56,18 @@ class Login extends Component {
         showEmailVerificationModal: nextProps.auth.showEmailVerificationModal,
       });
     }
+    if (nextProps.auth.loginFailed === true) {
+      this.props.alert.error('Invalid Credentials !!');
+    }
+    if (nextProps.auth.emailVerification === true) {
+      this.props.alert.success('Email verified Sucessfully');
+      this.props.history.push('/dashboard/account');
+    }
+    if (nextProps.auth.emailVerification === false)
+      this.props.alert.error('Email Verification Failed');
   };
 
   componentDidUpdate = () => {
-    if (!isEmpty(this.props.errors) && !this.state.formError) {
-      this.props.alert.error('Invalid Credentials !!');
-    }
     if (!isEmpty(this.props.loggedInSucessful)) {
       this.props.alert.error(this.props.loggedInSucessful);
     }
@@ -139,7 +145,7 @@ class Login extends Component {
   };
 
   submitEmailVerificationCode = (token) => {
-    loginAPI.verifyEmail(token, this.state.email);
+    loginAPI.verifyEmail(this.state.email, token);
   };
 
   render() {

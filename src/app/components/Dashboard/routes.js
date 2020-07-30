@@ -8,7 +8,7 @@ import DepositCoins from './Exchange-Wallet/Deposit/DepositCoins';
 import WithdrawCoins from './Exchange-Wallet/Withdraw/WithdrawCoins';
 import FuturesTransfer from './Futures-Wallet/Transfer/FuturesTransfer';
 import OptionTransfer from './Options-Wallet/Transfer/OptionTransfer';
-import ChangePassword from './Account-Preferences/change-password/change-password';
+import ChangePassword from './Account-Preferences/change-password/index';
 import Change2FA from './Account-Preferences/change-2fa/change-2fa';
 
 const dashboardRoutes = [
