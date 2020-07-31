@@ -38,6 +38,15 @@ class ApiSecretKeyAPI {
     } catch (error) {}
   };
 
+  getEmailVerificationCodeForDeletion = async (email) => {
+    try {
+      const value = await API.get('/users/send_email', {
+        params: {email: email, category: 'delete_key_pair'},
+      });
+      console.log(value);
+    } catch (error) {}
+  };
+
   // function for get new api key secret
   getNewKeyAndSecret = async (data) => {
     try {
@@ -56,12 +65,13 @@ class ApiSecretKeyAPI {
   };
 
   // function for delete api key secret
-  deleteApiKey = async (id, name) => {
+  deleteApiKey = async (data) => {
     try {
-      const value = await API.post('/users/delete_key_pair', {name});
+      const value = await API.post('/users/delete_key_pair', data);
+      console.log(value);
       if (value) {
         let ar = store.getState().apikeys.apiSecretKeysArray;
-        let newarr = ar.filter((el) => el.name != name);
+        let newarr = ar.filter((el) => el.name != data.name);
         store.dispatch(getAllApiSecret(newarr));
       }
     } catch (er) {

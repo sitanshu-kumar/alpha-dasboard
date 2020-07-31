@@ -4,6 +4,7 @@ import {clearErrors} from '../../../../redux/actions/errorActions';
 import ConfirmPasswordChangeModal from './passwordUpdateModal';
 import {Slide} from 'react-awesome-reveal';
 import {changePasswordAPI} from './ChangePasswordAPI';
+import NotAuthorized from '../../../Dashboard/NotAuthroized';
 const validPassword = RegExp(
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
 );
@@ -158,65 +159,73 @@ class ChangePasswordFrom extends Component {
 
   render() {
     const {next} = this.props.navigation;
-
+    console.log(this.props.profile.profile);
     return (
       <>
-        <div className="main">
-          <div className="main-header">
-            <h3>Account & Preferences</h3>
-            <div className="main-sub-header">
-              Change Password
-              <hr />
-            </div>
+        {!this.props.profile.profile.enabled_2fa && (
+          <div className="main d-flex justify-content-center mt-5">
+            {' '}
+            <NotAuthorized />
           </div>
-          <Slide direction="right">
-            <div className="main-body">
-              <div className="form-body white-bg">
-                {this.getHeading()}
-                <div className="form-container">
-                  <div className="a5-login-field">
-                    <input
-                      onInput={this.oldPasswordChange}
-                      type="password"
-                      placeholder="Old Password"
-                    />
-                    <span className="a5-login-error">
-                      {this.state.oldPasswordError}
-                    </span>
-                  </div>
-                  <div className="a5-login-field">
-                    <input
-                      onInput={this.newPasswordChange}
-                      type="password"
-                      placeholder="New Password"
-                    />
-                    <span className="a5-login-error">
-                      {this.state.newPasswordError}
-                    </span>
-                  </div>
-                  <div className="a5-login-field">
-                    <input
-                      onInput={this.confirmpasswordChange}
-                      type="password"
-                      placeholder="Confirm New Password"
-                    />
-                    <span className="a5-login-error">
-                      {this.state.confirmNewPasswordError}
-                    </span>
-                  </div>
-                  <div className="form-btn-holder align-items-center mt-5">
-                    <a
-                      onClick={this.onSubmit}
-                      className="form-register align-items-center"
-                    >
-                      Next
-                    </a>
+        )}
+        {this.props.profile.profile.enabled_2fa && (
+          <div className="main">
+            <div className="main-header">
+              <h3>Account & Preferences</h3>
+              <div className="main-sub-header">
+                Change Password
+                <hr />
+              </div>
+            </div>
+            <Slide direction="right">
+              <div className="main-body">
+                <div className="form-body white-bg">
+                  {this.getHeading()}
+                  <div className="form-container">
+                    <div className="a5-login-field">
+                      <input
+                        onInput={this.oldPasswordChange}
+                        type="password"
+                        placeholder="Old Password"
+                      />
+                      <span className="a5-login-error">
+                        {this.state.oldPasswordError}
+                      </span>
+                    </div>
+                    <div className="a5-login-field">
+                      <input
+                        onInput={this.newPasswordChange}
+                        type="password"
+                        placeholder="New Password"
+                      />
+                      <span className="a5-login-error">
+                        {this.state.newPasswordError}
+                      </span>
+                    </div>
+                    <div className="a5-login-field">
+                      <input
+                        onInput={this.confirmpasswordChange}
+                        type="password"
+                        placeholder="Confirm New Password"
+                      />
+                      <span className="a5-login-error">
+                        {this.state.confirmNewPasswordError}
+                      </span>
+                    </div>
+                    <div className="form-btn-holder align-items-center mt-5">
+                      <a
+                        onClick={this.onSubmit}
+                        className="form-register align-items-center "
+                      >
+                        Next
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Slide>
-        </div>
+            </Slide>
+          </div>
+        )}
       </>
     );
   }

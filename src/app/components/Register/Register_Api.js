@@ -15,6 +15,7 @@ class RegisterAPI {
   registerUser = async (userData) => {
     try {
       const value = await API.post('/users/sign_up', userData);
+      console.log(value);
       if (!value.data.email_confirmed) {
         store.dispatch(showEmailVerification());
       }

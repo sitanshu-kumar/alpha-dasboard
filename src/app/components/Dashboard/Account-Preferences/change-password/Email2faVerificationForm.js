@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {Link, withRouter} from 'react-router-dom';
 import {clearErrors} from '../../../../redux/actions/errorActions';
 import {Slide} from 'react-awesome-reveal';
+import store from '../../../../Redux_Store/store';
 import {withAlert} from 'react-alert';
 class Email2faVerfication extends Component {
   constructor(props) {
@@ -47,57 +49,45 @@ class Email2faVerfication extends Component {
     if (nextProps.errors === 'Token MisMatch') {
       this.props.alert.error('Wrong Token or Password Entered');
     }
+
+    if (nextProps.auth.passwordChanged === true) {
+      this.props.alert.success('Password Changed Sucessfully');
+      setTimeout(() => {
+        store.dispatch({type: 'USER_PASSWORD_CHANGE', payload: null});
+        this.props.history.push('/dashboard/account');
+      }, 500);
+    }
   };
   onSubmit = (e) => {
     e.preventDefault();
+    this.props.clearErrors();
     const {emailCode, faCode} = this.state;
 
-    if (this.props.profile.profile.enabled_2fa) {
-      if (emailCode.length >= 6 && faCode.length >= 6) {
-        this.props.getSecurtyValue({emailCode, faCode});
-      } else {
-        let emailCodeError = '';
-        let faCodeError = '';
-        if (emailCode.length < 6) {
-          emailCodeError = 'Code Must be of 6 digit';
-        }
-        if (!emailCode) {
-          emailCodeError = 'Please enter email Activation Code !!';
-        }
-
-        if (!faCode) {
-          faCodeError = 'Please enter 2 fa Verification Code ';
-        }
-        if (faCode.length < 6) {
-          faCodeError = 'Code Must be of 6 digit';
-        }
-        this.setState({
-          emailCodeError,
-          faCodeError,
-          formError: '',
-          isDirty: true,
-        });
-      }
+    if (emailCode.length >= 6 && faCode.length >= 6) {
+      this.props.getSecurtyValue({emailCode, faCode});
+      this.props.onDataSubmit();
     } else {
-      if (emailCode.length >= 6) {
-        console.log(emailCode);
-        this.props.getSecurtyValue({emailCode});
-        this.props.onDataSubmit();
-      } else {
-        let emailCodeError = '';
-        if (emailCode.length < 6) {
-          emailCodeError = 'Code Must be of 6 digit';
-        }
-        if (!emailCode) {
-          emailCodeError = 'Please enter email Activation Code !!';
-        }
-
-        this.setState({
-          emailCodeError,
-          formError: '',
-          isDirty: true,
-        });
+      let emailCodeError = '';
+      let faCodeError = '';
+      if (emailCode.length < 6) {
+        emailCodeError = 'Code Must be of 6 digit';
       }
+      if (!emailCode) {
+        emailCodeError = 'Please enter email Activation Code !!';
+      }
+
+      if (!faCode) {
+        faCodeError = 'Please enter 2 fa Verification Code ';
+      }
+      if (faCode.length < 6) {
+        faCodeError = 'Code Must be of 6 digit';
+      }
+      this.setState({
+        emailCodeError,
+        faCodeError,
+        formError: '',
+        isDirty: true,
+      });
     }
   };
   render() {
@@ -127,18 +117,17 @@ class Email2faVerfication extends Component {
                       {this.state.emailCodeError}
                     </span>
                   </div>
-                  {this.props.profile.profile.enabled_2fa ? (
-                    <div className="a5-login-field">
-                      <input
-                        onInput={this.google2FACodeChange}
-                        type="text"
-                        placeholder="Enter 2fa Verification Code"
-                      />
-                      <span className="a5-login-error">
-                        {this.state.faCodeError}
-                      </span>
-                    </div>
-                  ) : null}
+
+                  <div className="a5-login-field">
+                    <input
+                      onInput={this.google2FACodeChange}
+                      type="text"
+                      placeholder="Enter 2fa Verification Code"
+                    />
+                    <span className="a5-login-error">
+                      {this.state.faCodeError}
+                    </span>
+                  </div>
 
                   <div className="form-btn-holder align-items-center mt-5">
                     <a
@@ -176,4 +165,5 @@ export default compose(
   connect(mapStateToProps, {
     clearErrors,
   }),
+  withRouter,
 )(Email2faVerfication);

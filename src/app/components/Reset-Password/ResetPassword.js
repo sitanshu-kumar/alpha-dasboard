@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
-import {BaseApiUrl} from '../../redux/config';
+import store from '../../Redux_Store/store';
 import {goToResetPasswordForm} from '../../redux/actions/authActions';
 import {connect} from 'react-redux';
 import {resetPasswordAPI} from './Reset-PasswordApi';
@@ -37,6 +37,7 @@ export class ResetPassword extends Component {
   }
   submit = (e) => {
     e.preventDefault();
+    store.dispatch({type: 'LOGIN_FAILED', payload: null});
     const {email, emailError} = this.state;
     if (email) {
       resetPasswordAPI.getEmailVerificationCode(email);

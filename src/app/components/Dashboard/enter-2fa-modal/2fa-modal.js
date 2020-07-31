@@ -20,7 +20,7 @@ class MFAModal extends Component {
       isDirty: false,
       showNext: false,
       ShowPrev: true,
-      apiKeyName: '',
+      apiKeyName: this.props.tokenToDelete || null,
     };
   }
   errorMap = {
@@ -64,34 +64,18 @@ class MFAModal extends Component {
     }
   };
 
-  onFinalSubmit = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
     const {emailCode, faCode, apiKeyName} = this.state;
 
-    if (apiKeyName) {
-      this.props.hideMFAModal();
-      this.props.valueFromComponent({
-        name: apiKeyName,
-        token: emailCode,
-        token_2fa: faCode,
-      });
-    } else {
-      let apiKeyError = '';
-      if (!apiKeyName) {
-        apiKeyError = 'Please Enter Valid Name';
-      }
-      this.setState({
-        apiKeyError,
-      });
-    }
-  };
-  onSubmit = (e) => {
-    e.preventDefault();
-    const {emailCode, faCode} = this.state;
-
     if (this.props.profile.profile.enabled_2fa) {
-      if (emailCode.length >= 6 && faCode.length >= 6) {
-        this.setState({showNext: true, ShowPrev: false});
+      if (emailCode.length >= 6 && faCode.length >= 6 && apiKeyName) {
+        this.props.hideMFAModal();
+        this.props.valueFromComponent({
+          name: apiKeyName,
+          token: emailCode,
+          token_2fa: faCode,
+        });
       } else {
         let emailCodeError = '';
         let faCodeError = '';
@@ -107,11 +91,16 @@ class MFAModal extends Component {
         if (!faCode) {
           faCodeError = 'Please enter 2 fa Verification Code ';
         }
+        let apiKeyError = '';
+        if (!apiKeyName) {
+          apiKeyError = 'Please Enter Valid Name';
+        }
 
         this.setState({
           emailCodeError,
           faCodeError,
           formError: '',
+          apiKeyError,
           isDirty: true,
         });
       }
@@ -142,100 +131,36 @@ class MFAModal extends Component {
   };
 
   render() {
+    console.log('nametodelete', this.props.tokenToDelete);
     return (
       <>
         <div onClick={() => this.props.hideMFAModal()} className="curtain">
           <div onClick={(e) => e.stopPropagation()} className="box-modal">
-            {this.state.ShowPrev ? (
-              <>
-                <div className="box-modal-header">
-                  <h3>Security Verification</h3>
-                </div>
-                <div className="box-modal-body">
-                  <div className="main-body">
-                    <div className="form-body white-bg">
-                      <div className="form-container">
-                        <div className="a5-login-field">
+            <div className="box-modal-header">
+              <h3>Enter Details</h3>
+            </div>
+            <div className="box-modal-body">
+              <div className="main-body">
+                <div className="form-body white-bg">
+                  <div className="form-container">
+                    <div className="a5-login-field">
+                      {this.props.tokenToDelete && (
+                        <>
                           <input
-                            onInput={this.emailCodeChange}
+                            onInput={this.apiNameChange}
                             type="text"
-                            placeholder="Email Verification Code"
+                            placeholder={this.props.tokenToDelete}
+                            value={this.props.tokenToDelete}
+                            readOnly
                           />
                           <span className="a5-login-error">
-                            {this.state.emailCodeError}
+                            {this.state.apiKeyError}
                           </span>
-                        </div>
-                        {this.props.profile.profile.enabled_2fa ? (
-                          <div className="a5-login-field">
-                            <input
-                              onInput={this.google2FACodeChange}
-                              type="text"
-                              placeholder="Enter 2fa Verification Code"
-                            />
-                            <span className="a5-login-error">
-                              {this.state.faCodeError}
-                            </span>
-                          </div>
-                        ) : null}
-
-                        <div className="form-btn-holder align-items-center mt-5">
-                          <a
-                            onClick={this.onSubmit}
-                            className="form-register align-items-center"
-                          >
-                            Next
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*<div className="transfer-form">
-                <div className="transfer-form-field">
-                  <h3>Enter Email Verification code</h3>
-                  <input
-                    placeholder={'Enter 2FA'}
-                    style={{width: '100%'}}
-                    type="text"
-                    onInput={this.handleCode}
-                  />
-                  <span className="transfer-form-field-error">
-                    {this.state.error}
-                  </span>
-                </div>
-                <div className="transfer-form-field">
-                  <input
-                    placeholder={'Enter 2FA'}
-                    style={{width: '100%'}}
-                    type="text"
-                    onInput={this.handleCode}
-                  />
-                  <span className="transfer-form-field-error">
-                    {this.state.error}
-                  </span>
-                </div>
-                <div className="transfer-center-button">
-                  <button
-                    onClick={this.handleSubmit}
-                    className="form-btn yellow send-button-modal"
-                  >
-                    Send
-                  </button>
-                </div>
-              </div>*/}
-                </div>
-              </>
-            ) : null}
-
-            {this.state.showNext ? (
-              <>
-                <div className="box-modal-header">
-                  <h3>Enter API KEY Name</h3>
-                </div>
-                <div className="box-modal-body">
-                  <div className="main-body">
-                    <div className="form-body white-bg">
-                      <div className="form-container">
-                        <div className="a5-login-field">
+                        </>
+                      )}
+                      {!this.props.tokenToDelete && (
+                        <>
+                          {' '}
                           <input
                             onInput={this.apiNameChange}
                             type="text"
@@ -244,22 +169,43 @@ class MFAModal extends Component {
                           <span className="a5-login-error">
                             {this.state.apiKeyError}
                           </span>
-                        </div>
+                        </>
+                      )}
+                    </div>
+                    <div className="a5-login-field">
+                      <input
+                        onInput={this.emailCodeChange}
+                        type="text"
+                        placeholder="Email Verification Code"
+                      />
+                      <span className="a5-login-error">
+                        {this.state.emailCodeError}
+                      </span>
+                    </div>
 
-                        <div className="form-btn-holder align-items-center mt-5">
-                          <a
-                            onClick={this.onFinalSubmit}
-                            className="form-register align-items-center"
-                          >
-                            Next
-                          </a>
-                        </div>
-                      </div>
+                    <div className="a5-login-field">
+                      <input
+                        onInput={this.google2FACodeChange}
+                        type="text"
+                        placeholder="Enter 2fa Verification Code"
+                      />
+                      <span className="a5-login-error">
+                        {this.state.faCodeError}
+                      </span>
+                    </div>
+
+                    <div className="form-btn-holder align-items-center mt-5">
+                      <a
+                        onClick={this.onSubmit}
+                        className="form-register align-items-center"
+                      >
+                        Submit
+                      </a>
                     </div>
                   </div>
                 </div>
-              </>
-            ) : null}
+              </div>
+            </div>
           </div>
         </div>
       </>

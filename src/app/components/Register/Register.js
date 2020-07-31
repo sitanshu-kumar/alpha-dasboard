@@ -13,6 +13,7 @@ import ConfirmEmailModal from '../confirm-email-code/confirm-email';
 import {withRouter} from 'react-router-dom';
 import {clearErrors} from '../../redux/actions/errorActions';
 import {registerAPI} from './Register_Api';
+import store from '../../Redux_Store/store';
 import {withAlert} from 'react-alert';
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
@@ -35,8 +36,6 @@ export class Register extends Component {
       passwordErr: '',
       confirmPass: '',
       confirmPassErr: '',
-      country: '',
-      countryErr: '',
       agreement: false,
       agreementErr: '',
       isDirty: false,
@@ -44,11 +43,6 @@ export class Register extends Component {
       formError: '',
     };
   }
-
-  countryArray = [
-    {symbol: 'INDIA', id: '2'},
-    {symbol: 'BANGLADESH', id: '3'},
-  ];
 
   componentDidMount = () => {
     this.props.hideEmailVerification();
@@ -75,24 +69,25 @@ export class Register extends Component {
       this.props.alert.success('Email verified Sucessfully');
       this.props.history.push('/dashboard/account');
     }
-    if (newProps.auth.emailVerification === false)
-      this.props.alert.error('Email Verification Failed');
   };
 
   onSubmit = () => {
     this.checkAgreementAndCountry();
+    store.dispatch({type: 'EMAIL_EXIST', payload: null});
+    store.dispatch({
+      type: 'SHOW_EMAIL_VERIFICATION',
+      payload: false,
+    });
   };
 
   checkAgreementAndCountry = () => {
-    const {agreement, country} = this.state;
+    const {agreement} = this.state;
     let agreementErr = '';
-    let countryErr = '';
-    if (isEmpty(country)) countryErr = 'Please Select a country !';
     if (!agreement) agreementErr = 'Please agree to terms first !';
-    this.setErrors(countryErr, agreementErr);
+    this.setErrors(agreementErr);
   };
 
-  setErrors = (countryErr, agreementErr) => {
+  setErrors = (agreementErr) => {
     let {
       firstName,
       firstNameErr,
@@ -104,8 +99,6 @@ export class Register extends Component {
       passwordErr,
       confirmPass,
       confirmPassErr,
-      country,
-      agreement,
     } = this.state;
 
     if (!firstName) firstNameErr = 'First Name is required !';
@@ -116,7 +109,8 @@ export class Register extends Component {
     else if (!validEmailRegex.test(email)) emailErr = 'Invalid Email !';
 
     if (!password) passwordErr = 'Password Required !';
-    else if (password.length <= 8)
+    if (!confirmPass) confirmPassErr = 'Confirm Password Required !';
+    else if (password.length < 8)
       passwordErr = 'Password must be at least 8 characters !';
     else if (!validPassword.test(password))
       passwordErr =
@@ -132,7 +126,6 @@ export class Register extends Component {
         emailErr ||
         passwordErr ||
         confirmPassErr ||
-        countryErr ||
         agreementErr
       )
     ) {
@@ -144,7 +137,7 @@ export class Register extends Component {
         passwordErr,
         confirmPassErr,
         emailErr,
-        countryErr,
+
         agreementErr,
       });
     }
@@ -152,17 +145,9 @@ export class Register extends Component {
 
   submit = () => {
     console.log('submitted');
-    let {
-      country,
-      email,
-      firstName,
-      lastName,
-      password,
-      confirmPass,
-    } = this.state;
+    let {email, firstName, lastName, password, confirmPass} = this.state;
 
     let userData = {
-      country,
       email,
       first_name: firstName,
       last_name: lastName,
@@ -187,6 +172,7 @@ export class Register extends Component {
   };
 
   emailHandle = (e) => {
+    store.dispatch({type: 'EMAIL_EXIST', payload: null});
     let email = e.target.value;
     let emailErr = '';
     if (!email) emailErr = 'Email is required !';
@@ -198,7 +184,7 @@ export class Register extends Component {
     let password = e.target.value;
     let passwordErr = '';
     if (!password) passwordErr = 'Password Required!';
-    else if (password.length <= 8)
+    else if (password.length < 8)
       passwordErr = 'Password must be at least 8 characters !';
     else if (!validPassword.test(password))
       passwordErr =
@@ -212,11 +198,6 @@ export class Register extends Component {
     if (confirmPass != this.state.password)
       confirmPassErr = 'Passwords must Match !';
     this.setState({confirmPass, confirmPassErr, formError: ''});
-  };
-
-  countrySelect = (country) => {
-    if (!isEmpty(country))
-      this.setState({country, countryErr: '', formError: ''});
   };
 
   agreementHandle = (e) => {
@@ -253,7 +234,6 @@ export class Register extends Component {
       emailErr,
       passwordErr,
       confirmPassErr,
-      countryErr,
       agreementErr,
       formError,
     } = this.state;
@@ -309,14 +289,7 @@ export class Register extends Component {
                 />
                 <span className="a5-login-error">{confirmPassErr}</span>
               </div>
-              <div className="a5-login-field form-style">
-                <A5DBSelect
-                  itemList={this.countryArray}
-                  onChange={this.countrySelect}
-                  placeholder="Select Country"
-                />
-                <span className="a5-login-error">{countryErr}</span>
-              </div>
+
               <div className="agreement">
                 <label className="a5-checkbox">
                   <span className="i-agree-text">
