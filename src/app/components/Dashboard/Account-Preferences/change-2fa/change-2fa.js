@@ -18,14 +18,7 @@ class Change2FA extends Component {
     error: '',
   };
 
-  componentDidMount = () => {
-    setTimeout(() => {
-      if (localStorage.getItem('token')) {
-        if (!this.props.profile.profile.enabled_2fa)
-          change2faApi.getSecretKeyFor2FA();
-      }
-    }, 500);
-  };
+  componentDidMount = () => {};
 
   componentWillReceiveProps = (nextProps) => {
     console.log('nextProps', nextProps);
@@ -58,7 +51,10 @@ class Change2FA extends Component {
       this.setState({copied: false});
     }, 3000);
   };
-
+  hanldleEnable = () => {
+    this.setState({showQR: true});
+    change2faApi.getSecretKeyFor2FA();
+  };
   changeMFAStatus = (bool) => {
     let token_2fa = this.state.mfa_for_enabling;
     if (token_2fa.length < 6)
@@ -109,7 +105,7 @@ class Change2FA extends Component {
               </p>
               {!enabled_2fa ? (
                 <button
-                  onClick={() => this.setState({showQR: true})}
+                  onClick={this.hanldleEnable}
                   className="form-btn yellow"
                 >
                   ENABLE
