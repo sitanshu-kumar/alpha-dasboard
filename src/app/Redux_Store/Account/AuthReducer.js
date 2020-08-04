@@ -7,6 +7,7 @@ import {
   SET_MFA_STATUS,
   SHOW_EMAIL_VERIFICATION,
   SET_RESET_PASSWORD_EMAIL,
+  RESEND_EMAIL_STATUS,
 } from '../types';
 
 const getFromLS = (key) => localStorage.getItem('token');
@@ -23,6 +24,7 @@ const initialState = {
   emailExist: null,
   loginFailed: null,
   passwordChanged: null,
+  resendMailStatus: null,
 };
 
 export default function (state = initialState, action) {
@@ -80,6 +82,9 @@ export default function (state = initialState, action) {
 
     case 'EMAIL_EXIST':
       return {...state, emailExist: action.payload};
+
+    case RESEND_EMAIL_STATUS:
+      return {...state, resendMailStatus: action.payload};
 
     case 'EMAIL_VERIFICATION_STATUS':
       return {...state, emailVerification: action.payload};

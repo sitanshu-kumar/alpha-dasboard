@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import A5DBSelect from '../../a5-themed-select/a5-themed-select';
 import {currencyOptions} from '../../fakeStore';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {withAlert} from 'react-alert';
 import './Withdraw.css';
 
 class WithdrawCoins extends Component {
@@ -106,111 +109,9 @@ class WithdrawCoins extends Component {
     const BTC = routes[4].layout + routes[4].path;
     const USDT = routes[5].layout + routes[5].path;
     const slctdCurr = this.state.selectedCurrency;
-
+    const {allWithdrawBTC, allWithdrawUSDT} = this.props.withdraw;
     return (
       <>
-        {/* <div className="containment">
-          <div className="balances">
-            <h3>Withdrawal</h3>
-            <hr />
-            <div className="left-sided">
-              <div className="balances-list">
-                <h3>Notes</h3>
-
-                <ul>
-                  <li>
-                    <span className="diamond"></span>
-                    Please verify your email after successfully submitting the
-                    withdrawal request
-                  </li>
-                  <li>
-                    <span className="diamond"></span>
-                    You can track the withdrawal progress in the transaction
-                    history section
-                  </li>
-                  <li>
-                    <span className="diamond"></span>
-                    Please do not withdraw this token to any ICO address
-                    directly
-                  </li>
-                </ul>
-              </div>
-              <div className="balances-form with-inline-info">
-                <div className="a5-form-field with-inline-info">
-                  <label>Currency</label>
-                  <A5DBSelect
-                    itemList={this.state.currencyArrayForSelect}
-                    placeholder={'Select...'}
-                    defaultValue={slctdCurr}
-                    onChange={(item) => {
-                      this.handleSelect(item);
-                    }}
-                  />
-                </div>
-                <div className="a5-form-field with-inline-info">
-                  <label>Address</label>
-                  <input onInput={this.addressInputHandler} type="text" />
-                  {this.getAddressError()}
-                </div>
-                <div className="a5-form-field with-inline-info">
-                  <label>Amount</label>
-                  <input
-                    onInput={this.amountInputHandler}
-                    min={0}
-                    step={10 ** (-1 * slctdCurr.toFixed)}
-                    type="number"
-                    ref={this.amountRef}
-                  />
-                  <span className="form-field-info">
-                    Avl Bal :{' '}
-                    {slctdCurr
-                      ? slctdCurr.availableBalanceExchange.toFixed(
-                          slctdCurr.toFixed,
-                        )
-                      : ''}{' '}
-                    {slctdCurr.symbol}
-                  </span>
-                  {this.getAmountError()}
-                </div>
-                <div className="a5-form-btn-grp">
-                  <button className="form-btn-yellow withdrawl-coin-send-button">
-                    Send
-                  </button>
-                </div>
-              </div>
-              <div className="balances mt-5">
-                <div className="table-container contained deposits pb-3">
-                  <div className="table-header">
-                    <h3>Withdrawal History</h3>
-                  </div>
-                  <div className="a5-table d-flex-justify-content-center">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>Quantity</th>
-                          <th>Date</th>
-                          <th>Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>4</td>
-                          <td>0.000</td>
-                          <td>0.000</td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>0.000</td>
-                          <td>0.000</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
         <div className="main">
           <div className="main-header">
             <h3>Account & Preferences</h3>
@@ -344,27 +245,56 @@ class WithdrawCoins extends Component {
                 <h3>Withdrawal History</h3>
               </div>
               <div className="a5-table d-flex-justify-content-center">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Quantity</th>
-                      <th>Date</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>4</td>
-                      <td>0.000</td>
-                      <td>0.000</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>0.000</td>
-                      <td>0.000</td>
-                    </tr>
-                  </tbody>
-                </table>
+                {location.pathname == BTC ? (
+                  <>
+                    {allWithdrawBTC &&
+                      allWithdrawBTC.map((item, index) => {
+                        return (
+                          <table className="table">
+                            <thead>
+                              <tr>
+                                <th>Quantity</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1000</td>
+                                <td>24th july 2020</td>
+                                <td>16:00:00</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        );
+                      })}
+                  </>
+                ) : (
+                  <>
+                    {' '}
+                    {allWithdrawUSDT &&
+                      allWithdrawUSDT.map((item, index) => {
+                        return (
+                          <table className="table">
+                            <thead>
+                              <tr>
+                                <th>Quantity</th>
+                                <th>Date</th>
+                                <th>Tme</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1000</td>
+                                <td>24th july 2020</td>
+                                <td>16:00:00</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        );
+                      })}
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -373,5 +303,12 @@ class WithdrawCoins extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  withdraw: state.withdraw,
+});
 
-export default withRouter(WithdrawCoins);
+export default compose(
+  withAlert(),
+  connect(mapStateToProps, {}),
+  withRouter,
+)(WithdrawCoins);

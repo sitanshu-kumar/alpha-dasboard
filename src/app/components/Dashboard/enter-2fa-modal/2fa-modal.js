@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {setMFAAuthentication} from '../../../redux/actions/authActions';
 import {BaseApiUrl} from '../../../redux/config';
 import {apiSecretKeyAPI} from '../Account-Preferences/Api-Secret/Api_SecretApi';
-import axios from 'axios';
 
 class MFAModal extends Component {
   constructor(props) {
@@ -95,30 +94,11 @@ class MFAModal extends Component {
         if (!apiKeyName) {
           apiKeyError = 'Please Enter Valid Name';
         }
-
         this.setState({
           emailCodeError,
           faCodeError,
           formError: '',
           apiKeyError,
-          isDirty: true,
-        });
-      }
-    } else {
-      if (emailCode.length >= 6) {
-        console.log(emailCode);
-      } else {
-        let emailCodeError = '';
-        if (emailCode.length < 6) {
-          emailCodeError = 'Code Must be of 6 digit';
-        }
-        if (!emailCode) {
-          emailCodeError = 'Please enter email Activation Code !!';
-        }
-
-        this.setState({
-          emailCodeError,
-          formError: '',
           isDirty: true,
         });
       }
@@ -131,17 +111,24 @@ class MFAModal extends Component {
   };
 
   render() {
-    console.log('nametodelete', this.props.tokenToDelete);
+    console.log(this.props.profile.profile.email);
     return (
       <>
         <div onClick={() => this.props.hideMFAModal()} className="curtain">
-          <div onClick={(e) => e.stopPropagation()} className="box-modal">
-            <div className="box-modal-header">
-              <h3>Enter Details</h3>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="box-modal"
+            style={{minHeight: '40rem', minWidth: '40rem'}}
+          >
+            <div className="box-modal-header text-center">
+              <h3>Security Verification</h3>
             </div>
             <div className="box-modal-body">
               <div className="main-body">
-                <div className="form-body white-bg">
+                <div
+                  className="form-body white-bg"
+                  style={{minHeight: '30rem'}}
+                >
                   <div className="form-container">
                     <div className="a5-login-field">
                       {this.props.tokenToDelete && (

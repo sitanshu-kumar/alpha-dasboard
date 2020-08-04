@@ -5,6 +5,7 @@ import Sidebar from './Sidebar/Sidebar';
 import {connect} from 'react-redux';
 import {getCurrentProfile} from '../../redux/actions/profileActions';
 import {hideEmailVerification} from '../../redux/actions/authActions';
+import {registerAPI} from '../Register/Register_Api';
 import Header from './Header/index';
 import routes from './routes';
 import setAuthToken from '../../utils/setAuthToken';
@@ -46,8 +47,7 @@ class Dashboard extends Component {
   componentDidMount = () => {
     this.checkLoginStatus();
     if (this.props.auth.isAuthenticated) {
-      setAuthToken(localStorage.getItem('token'));
-      this.props.getCurrentProfile();
+      registerAPI.getCurrentProfile();
       this.props.hideEmailVerification();
     }
     this.adjustSideBarHeight();

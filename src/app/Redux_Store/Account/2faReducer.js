@@ -1,7 +1,7 @@
 const initialState = {
   secret_key_2fa: '',
   secret_key_response_msg: null,
-  secret_key_response_msg: null,
+  invalidSecrectkey: null,
 };
 
 export default (state = initialState, action) => {
@@ -13,18 +13,17 @@ export default (state = initialState, action) => {
       };
       return state;
 
-    case 'SET_SECRET_KEY_RESPONSE':
-      return {
-        ...state,
-        secret_key_response_msg: action.payload,
-      };
-
     case 'SECRET_KEY_UPDATE_STATUS':
       return {
         ...state,
         secret_key_response_msg: action.payload,
       };
 
+    case 'SET_SECRET_KEY_ERROR':
+      return {
+        ...state,
+        invalidSecrectkey: action.payload,
+      };
     default:
       return state;
   }

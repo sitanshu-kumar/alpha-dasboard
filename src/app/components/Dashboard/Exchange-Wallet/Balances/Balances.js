@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {balanceApi} from './Balance_Api';
 export class Balances extends Component {
   componentDidMount = () => {
     // console.log(this.props);

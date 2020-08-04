@@ -1,11 +1,11 @@
 .coin-holder {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .currency-balance-details {
-  margin-left: auto;
+    margin-left: 5px;
 }
 
 .currency-balance-details table {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }

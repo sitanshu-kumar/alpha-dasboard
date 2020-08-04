@@ -11,6 +11,15 @@ import {
 } from './RegisterDispatchFunction';
 
 class RegisterAPI {
+  constructor() {
+    if (localStorage.getItem('token')) {
+      axios.defaults.headers.common[
+        // eslint-disable-next-line dot-notation
+        'Authorization'
+      ] = `Bearer ${localStorage.getItem('token')}`;
+    }
+  }
+
   // function for user register process
   registerUser = async (userData) => {
     try {
@@ -37,9 +46,25 @@ class RegisterAPI {
         const decoded = jwt_decode(jwt);
         store.dispatch(setCurrentUser(decoded, email, first_name, last_name));
         store.dispatch({type: 'EMAIL_VERIFICATION_STATUS', payload: true});
+        window.location.reload();
       }
     } catch (er) {
       store.dispatch({type: 'EMAIL_VERIFICATION_STATUS', payload: false});
+    }
+  };
+
+  // function for user mail verification
+  getCurrentProfile = async () => {
+    try {
+      const value = await API.get('/users/me');
+      if (value) {
+        store.dispatch({
+          type: 'GET_PROFILE',
+          payload: value.data,
+        });
+      }
+    } catch (er) {
+      console.log(er);
     }
   };
 }

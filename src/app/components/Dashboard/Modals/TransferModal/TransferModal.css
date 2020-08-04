@@ -1,207 +1,207 @@
 .bubble-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
 }
 
 .bubble-container h3 {
-  font-size: 1rem;
-  color: black;
+    font-size: 1rem;
+    color: black;
 }
 
 .bubble {
-  background-color: black;
-  padding: 1rem;
-  border: 1px solid var(--gold-pop);
-  border-radius: 3rem;
-  min-width: 12rem;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 900;
-  color: white;
+    background-color: black;
+    padding: 1rem;
+    border: 1px solid var(--gold-pop);
+    border-radius: 3rem;
+    min-width: 12rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: white;
 }
 
 .transfer-bubble-holder {
-  margin-bottom: 4rem;
-  margin-top: 2.5rem;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 95%;
+    margin-bottom: 4rem;
+    margin-top: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 95%;
 }
 
 .transfer-bubble-holder img {
-  height: 2rem;
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1.75rem;
+    height: 2rem;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.75rem;
 }
 
 .mb-6rem {
-  margin-bottom: 6rem;
+    margin-bottom: 6rem;
 }
 
 .box-modal {
-  min-width: 40rem;
-  min-height: 40rem;
-  background-color: white;
-  max-width: 0;
-  margin: 10rem auto auto;
-  color: var(--default-color);
+    min-width: 32rem;
+    min-height: 20rem;
+    background-color: white;
+    max-width: 0;
+    margin: 10rem auto auto;
+    border-radius: 5px;
+    color: var(--default-color);
 }
 
 .box-modal-header {
-  padding: 2rem;
-  border-bottom: 1px solid var(--gold-pop);
-  box-shadow: 0px 5px 5px -5px var(--gold-pop);
+    padding: 1rem;
+    border-bottom: 1px solid var(--gold-pop);
+    box-shadow: 0px 5px 5px -5px var(--gold-pop);
 }
 
-.box-modal-header h3 {
-  text-align: center;
-  color: var(--white-text);
+.box-modal-header h5 {
+    text-align: center;
+    color: var(--white-text);
 }
 
-.transfer-form {
-}
+.transfer-form {}
 
 .transfer-form-field {
-  max-width: 80%;
-  margin: 2rem auto;
-  text-align: center;
+    max-width: 90%;
+    margin: 1rem auto;
 }
 
 .transfer-form-field input {
-  width: 95%;
-  border: none;
-  padding: 0.5rem;
-
-  border-bottom: 1px solid var(--faded-text);
-  color: var(--faded-text);
-  outline: none;
+    width: 95%;
+    border: none;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--faded-text);
+    color: var(--faded-text);
+    outline: none;
 }
 
 .transfer-form-field input:focus {
-  border-bottom: 1px solid var(--gold-pop);
-  color: var(--gold-pop);
+    border-bottom: 1px solid var(--gold-pop);
+    color: var(--gold-pop);
 }
 
 .transfer-form-field label {
-  display: block;
-  margin: 0;
-  padding: 0;
-  margin-right: auto;
-  text-align: left;
-  color: var(--white-text);
-  max-width: 9rem;
-  font-size: 1rem;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-right: auto;
+    text-align: left;
+    color: var(--white-text);
+    max-width: 9rem;
+    font-size: 1rem;
 }
 
 .transfer-form-field .a5-select-list {
-  top: 2rem;
+    top: 2rem;
 }
 
 .transfer-form-field input:focus::-webkit-input-placeholder {
-  color: var(--gold-pop);
+    color: var(--gold-pop);
 }
 
 .transfer-form-field input::-webkit-input-placeholder {
-  color: var(--white-text);
+    color: var(--white-text);
 }
 
 .transfer-form-field input.value {
-  width: 50%;
-}
-.transfer-form-field input.info {
-  width: 50%;
-  text-align: right;
+    width: 50%;
 }
 
-.transfer-form-field input.value:focus + input.info {
-  border-bottom: 1px solid var(--gold-pop);
-  color: var(--white-text);
+.transfer-form-field input.info {
+    width: 50%;
+    text-align: right;
+}
+
+.transfer-form-field input.value:focus+input.info {
+    border-bottom: 1px solid var(--gold-pop);
+    color: var(--white-text);
 }
 
 .transfer-form-field input.info:focus {
-  border-bottom: 1px solid var(--faded-text);
-  color: var(--faded-text);
+    border-bottom: 1px solid var(--faded-text);
+    color: var(--faded-text);
 }
 
 .transfer-form-field .transfer-form-field-error {
-  width: 100%;
-  color: #9a1e1e;
-  margin-right: 66%;
+    width: 100%;
+    color: #9a1e1e;
+    margin-right: 66%;
 }
 
 .transfer-form-field .a5-select-container input {
-  width: 100%;
-  background-color: unset;
-  color: var(--gold-pop);
+    width: 100%;
+    background-color: unset;
+    color: var(--gold-pop);
 }
 
 .transfer-form-field input::-webkit-outer-spin-button,
 .transfer-form-field input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
+
 /* Firefox */
+
 .transfer-form-field input[type='number'] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 .transfer-center-button {
-  margin-top: 3rem;
-  text-align: center;
+    text-align: center;
+}
+
+.emailMsg {
+    margin-top: 5px;
 }
 
 .transfer-center-button .send-button-modal {
-  width: 80%;
+    width: 80%;
 }
 
 .close-modal {
-  color: var(--gold-pop);
-  float: right;
-  cursor: pointer;
-  transform: scaleX(1.5);
-  font-size: 1.5rem;
+    color: var(--gold-pop);
+    float: right;
+    cursor: pointer;
+    transform: scaleX(1.5);
+    font-size: 1.5rem;
 }
 
 @media (max-width: 440px) {
-  .transfer-bubble-holder {
-    flex-direction: column;
-  }
-  .bubble-container {
-    margin: 2rem;
-  }
-  .transfer-bubble-holder img {
-    margin-top: unset;
-  }
-  .box-modal {
-    min-width: 80%;
-    max-width: 80%;
-    margin: 1rem auto;
-  }
-
-  .transfer-form-field {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .transfer-form-field .transfer-form-field-error {
-    margin-right: 38%;
-  }
-
-  .transfer-form-field input.value {
-    width: 100%;
-  }
-
-  .transfer-form-field input.info {
-    width: 100%;
-    text-align: left;
-    border: none;
-  }
-  .transfer-form-field input.value:focus + input.info {
-    border: none;
-  }
+    .transfer-bubble-holder {
+        flex-direction: column;
+    }
+    .bubble-container {
+        margin: 2rem;
+    }
+    .transfer-bubble-holder img {
+        margin-top: unset;
+    }
+    .box-modal {
+        min-width: 80%;
+        max-width: 80%;
+        margin: 1rem auto;
+    }
+    .transfer-form-field {
+        display: flex;
+        flex-direction: column;
+    }
+    .transfer-form-field .transfer-form-field-error {
+        margin-right: 38%;
+    }
+    .transfer-form-field input.value {
+        width: 100%;
+    }
+    .transfer-form-field input.info {
+        width: 100%;
+        text-align: left;
+        border: none;
+    }
+    .transfer-form-field input.value:focus+input.info {
+        border: none;
+    }
 }
